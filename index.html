@@ -1,1296 +1,977 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Portfólio de William Oliveira — Desenvolvedor de Software, Dados & IA com experiência operacional como Piloto RPAS Offshore no setor de óleo e gás.">
-<title>William Oliveira — Desenvolvedor | Dados & IA | RPAS Offshore</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>William Oliveira — Dev · Dados & IA · RPAS Offshore</title>
+<meta name="description" content="William Oliveira (TheDevOffshore) — Desenvolvedor, Dados & IA com DNA offshore. Software para operações críticas, construído por quem opera no alto-mar." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <style>
-/* ── RESET ── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
 :root{
-  --black:   #080c10;
-  --navy:    #0a1628;
-  --deep:    #0d1f3c;
-  --card:    #111827;
-  --card2:   #1a2435;
-  --border:  rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.13);
-  --text:    #e8eef5;
-  --text2:   #8ca0b8;
-  --text3:   #4d6480;
-  --gold:    #e8a020;
-  --gold2:   #f5b830;
-  --gold-bg: rgba(232,160,32,0.10);
-  --green:   #22c55e;
-  --green-bg:rgba(34,197,94,0.10);
-  --blue:    #60a5fa;
-  --blue-bg: rgba(96,165,250,0.10);
-  --red:     #f87171;
-  --r:       8px;
-  --r-lg:    14px;
-  --font:    'Space Grotesk',sans-serif;
-  --mono:    'JetBrains Mono',monospace;
-  --body:    'Inter',sans-serif;
+  --void:#04070c; --deep:#070d16; --panel:#0b1421; --panel2:#0f1d30;
+  --line:rgba(120,180,230,.10); --line2:rgba(56,189,248,.30); --line3:rgba(56,189,248,.55);
+  --cyan:#38bdf8; --cyan-br:#7dd3fc; --cyan-dim:#1d6f9c;
+  --amber:#f5b830; --amber-dim:#a8771a;
+  --green:#34d399; --red:#fb7185;
+  --text:#dce8f5; --dim:#839ab6; --faint:#46597a;
+  --disp:'Chakra Petch',sans-serif; --body:'Space Grotesk',sans-serif; --mono:'JetBrains Mono',monospace;
+  --r:4px; --maxw:1180px;
 }
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-  font-family:var(--body);
-  background:var(--black);
-  color:var(--text);
-  line-height:1.6;
-  overflow-x:hidden;
+  background:var(--void); color:var(--text); font-family:var(--body);
+  line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased;
+  position:relative;
 }
-
-/* ── NOISE TEXTURE ── */
-body::before{
-  content:'';
-  position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity:0.4;pointer-events:none;z-index:0;
+/* ambient layers */
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:46px 46px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 80%);
+  opacity:.5;
 }
-
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:0 32px;height:56px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(8,12,16,0.85);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  display:flex;align-items:center;gap:10px;
-  font-family:var(--mono);font-size:13px;font-weight:500;color:var(--text2);
-  text-decoration:none;
-}
-.nav-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold)}
-.nav-links{display:flex;gap:28px}
-.nav-links a{
-  font-size:12px;font-weight:500;color:var(--text3);
-  text-decoration:none;transition:color .15s;letter-spacing:.02em;
-}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{
-  background:var(--gold);color:#000;
-  font-size:12px;font-weight:700;padding:6px 16px;
-  border-radius:6px;text-decoration:none;transition:all .15s;
-  font-family:var(--font);
-}
-.nav-cta:hover{background:var(--gold2)}
-
-/* ── HERO ── */
-.hero{
-  position:relative;z-index:1;
-  min-height:100vh;
-  display:flex;align-items:center;
-  padding:80px 32px 60px;
-  overflow:hidden;
-}
-
-/* Grid de radar ao fundo */
-.hero-bg{
-  position:absolute;inset:0;
+.bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(232,160,32,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 50% at 80% 80%, rgba(96,165,250,0.04) 0%, transparent 60%);
+   radial-gradient(700px 500px at 78% -5%,rgba(56,189,248,.10),transparent 60%),
+   radial-gradient(600px 600px at 10% 8%,rgba(245,184,48,.06),transparent 55%);
 }
-.radar-ring{
-  position:absolute;
-  border:1px solid rgba(232,160,32,0.08);
-  border-radius:50%;
-  top:50%;left:60%;
-  transform:translate(-50%,-50%);
-  animation:radarPulse 4s ease-in-out infinite;
-}
-@keyframes radarPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.15;transform:translate(-50%,-50%) scale(1.05)}}
+.scanlines{position:fixed;inset:0;z-index:60;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0 2px,rgba(0,0,0,.18) 2px 3px);
+  mix-blend-mode:multiply;opacity:.4}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.mono{font-family:var(--mono)}
 
-.hero-wrap{
-  max-width:1100px;margin:0 auto;width:100%;
-  display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center;
-  position:relative;z-index:2;
-}
+/* ===== BOOT LOADER ===== */
+#boot{position:fixed;inset:0;z-index:200;background:var(--void);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  font-family:var(--mono);font-size:13px;color:var(--cyan);transition:opacity .6s ease,visibility .6s}
+#boot.done{opacity:0;visibility:hidden}
+.boot-box{width:min(440px,86vw)}
+.boot-head{display:flex;justify-content:space-between;color:var(--faint);font-size:11px;letter-spacing:.18em;margin-bottom:18px;text-transform:uppercase}
+.boot-lines{min-height:130px}
+.boot-line{opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;white-space:pre;color:var(--dim)}
+.boot-line.show{opacity:1;transform:none}
+.boot-line .ok{color:var(--green)}
+.boot-line .tag{color:var(--cyan)}
+.boot-bar{margin-top:22px;height:3px;background:rgba(56,189,248,.15);border-radius:2px;overflow:hidden}
+.boot-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan));box-shadow:0 0 12px var(--cyan);transition:width .1s linear}
+.boot-pct{display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--faint)}
 
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--mono);font-size:11px;color:var(--gold);
-  background:var(--gold-bg);border:1px solid rgba(232,160,32,0.2);
-  padding:4px 12px;border-radius:99px;margin-bottom:22px;
-  letter-spacing:.08em;
-}
-.hero-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 1.5s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+/* ===== HUD frame corners (reusable) ===== */
+.frame{position:relative}
+.frame::before,.frame::after{content:"";position:absolute;width:14px;height:14px;border-color:var(--line2);border-style:solid;pointer-events:none;transition:border-color .3s}
+.frame::before{top:-1px;left:-1px;border-width:1px 0 0 1px}
+.frame::after{bottom:-1px;right:-1px;border-width:0 1px 1px 0}
 
-h1{
-  font-family:var(--font);
-  font-size:clamp(36px,5vw,58px);
-  font-weight:700;
-  line-height:1.05;
-  letter-spacing:-.02em;
-  margin-bottom:20px;
-}
-h1 .name-highlight{
-  background:linear-gradient(135deg,var(--gold),var(--gold2),#fff9e0);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-h1 .role-line{
-  display:block;
-  font-size:clamp(20px,2.5vw,28px);
-  color:var(--text2);font-weight:500;letter-spacing:-.01em;margin-top:6px;
-}
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:80;
+  backdrop-filter:blur(10px);background:rgba(4,7,12,.7);border-bottom:1px solid var(--line);
+  transition:background .3s}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.04em;display:flex;align-items:center;gap:9px}
+.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
+.brand b{color:var(--cyan)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.nav-links{display:flex;gap:26px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.nav-links a{color:var(--dim);transition:color .2s;position:relative}
+.nav-links a:hover{color:var(--cyan)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--cyan);transition:width .25s}
+.nav-links a:hover::after{width:100%}
+.nav-cta{font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--line2);
+  padding:8px 15px;color:var(--cyan);transition:.25s;text-transform:uppercase}
+.nav-cta:hover{background:var(--cyan);color:var(--void);box-shadow:0 0 18px rgba(56,189,248,.4)}
+.burger{display:none;font-family:var(--mono);color:var(--cyan);border:1px solid var(--line2);padding:7px 11px;cursor:pointer}
 
-.hero-desc{
-  font-size:15px;color:var(--text2);line-height:1.7;
-  max-width:500px;margin-bottom:32px;
+/* ===== HERO ===== */
+header{position:relative;padding:148px 0 70px;overflow:hidden}
+.radar{position:absolute;right:-160px;top:40px;width:620px;height:620px;z-index:0;opacity:.55;pointer-events:none}
+.radar .ring{position:absolute;inset:0;margin:auto;border:1px solid rgba(56,189,248,.16);border-radius:50%}
+.radar .sweep{position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(56,189,248,.28),transparent 32%);
+  animation:spin 5s linear infinite;
+  mask:radial-gradient(circle,#000 0 70%,transparent 71%);-webkit-mask:radial-gradient(circle,#000 0 70%,transparent 71%)}
+.radar .blip{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:46px;align-items:center;position:relative;z-index:2}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);
+  display:inline-flex;align-items:center;gap:9px;margin-bottom:22px}
+.eyebrow .ln{width:34px;height:1px;background:var(--cyan)}
+.h-name{font-family:var(--disp);font-weight:700;font-size:clamp(40px,6.6vw,76px);line-height:.98;letter-spacing:.01em;
+  position:relative;color:var(--text)}
+.glitch{position:relative}
+.glitch::before,.glitch::after{content:attr(data-t);position:absolute;left:0;top:0;width:100%;overflow:hidden}
+.glitch::before{color:var(--cyan);clip-path:inset(0 0 55% 0);animation:gl1 4.5s infinite steps(2)}
+.glitch::after{color:var(--amber);clip-path:inset(58% 0 0 0);animation:gl2 4.5s infinite steps(2)}
+@keyframes gl1{0%,92%,100%{transform:none;opacity:0}93%{transform:translate(-3px,-1px);opacity:.8}96%{transform:translate(2px,1px);opacity:.6}}
+@keyframes gl2{0%,92%,100%{transform:none;opacity:0}94%{transform:translate(3px,1px);opacity:.7}97%{transform:translate(-2px,0);opacity:.5}}
+.h-sub{font-family:var(--disp);font-weight:500;font-size:clamp(17px,2.1vw,23px);color:var(--cyan-br);margin-top:18px;letter-spacing:.02em}
+.h-desc{color:var(--dim);font-size:16px;max-width:520px;margin-top:18px}
+.h-desc b{color:var(--text);font-weight:600}
+.h-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:13px 22px;
+  border:1px solid var(--line2);transition:.25s;display:inline-flex;align-items:center;gap:9px;cursor:pointer}
+.btn-pri{background:var(--cyan);color:var(--void);border-color:var(--cyan);font-weight:700}
+.btn-pri:hover{box-shadow:0 0 26px rgba(56,189,248,.5);transform:translateY(-2px)}
+.btn-gho{color:var(--cyan)}
+.btn-gho:hover{border-color:var(--cyan);background:rgba(56,189,248,.08);transform:translateY(-2px)}
+/* click glitch (echoes the name effect) */
+@keyframes btnGlitch{
+  0%{transform:translate(0,0)}
+  12%{transform:translate(-3px,1px);box-shadow:3px 0 0 var(--amber),-3px 0 0 var(--cyan);clip-path:inset(0 0 60% 0)}
+  24%{transform:translate(3px,-1px);box-shadow:-3px 0 0 var(--amber),3px 0 0 var(--cyan);clip-path:inset(45% 0 0 0)}
+  38%{transform:translate(-2px,0);box-shadow:2px 0 0 var(--cyan),-2px 0 0 var(--amber);clip-path:inset(0 0 0 0)}
+  50%{transform:translate(2px,1px);box-shadow:-2px 0 0 var(--cyan),2px 0 0 var(--amber);clip-path:inset(0 40% 0 0)}
+  64%{transform:translate(-1px,0);clip-path:inset(0 0 0 0)}
+  78%{transform:translate(1px,0);box-shadow:1px 0 0 var(--amber),-1px 0 0 var(--cyan)}
+  100%{transform:translate(0,0);box-shadow:none}
 }
-.hero-desc strong{color:var(--text);font-weight:600}
+.glitch-fx{animation:btnGlitch .42s steps(2,end)!important}
 
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
-.btn-hero-primary{
-  background:var(--gold);color:#000;
-  font-family:var(--font);font-size:13px;font-weight:700;
-  padding:11px 24px;border-radius:var(--r);
-  text-decoration:none;transition:all .15s;
-  display:inline-flex;align-items:center;gap:7px;
-}
-.btn-hero-primary:hover{background:var(--gold2);transform:translateY(-1px)}
-.btn-hero-ghost{
-  background:transparent;color:var(--text2);
-  border:1px solid var(--border2);
-  font-family:var(--font);font-size:13px;font-weight:500;
-  padding:11px 24px;border-radius:var(--r);
-  text-decoration:none;transition:all .15s;
-  display:inline-flex;align-items:center;gap:7px;
-}
-.btn-hero-ghost:hover{background:var(--card);color:var(--text);border-color:var(--gold)}
+/* hero telemetry panel */
+.panel{background:linear-gradient(160deg,var(--panel),var(--deep));border:1px solid var(--line);padding:22px}
+.tele-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:16px}
+.tele-top .id{font-family:var(--disp);font-weight:700;letter-spacing:.05em}
+.tele-top .st{font-family:var(--mono);font-size:11px;color:var(--green);border:1px solid rgba(52,211,153,.4);padding:3px 8px;letter-spacing:.1em}
+.tele-row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.tele-row:last-child{border-bottom:none}
+.tele-row span:first-child{color:var(--faint);letter-spacing:.05em}
+.tele-row span:last-child{color:var(--cyan-br)}
+.tele-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:16px}
+.tele-stat{background:var(--deep);padding:14px 10px;text-align:center}
+.tele-stat .n{font-family:var(--disp);font-weight:700;font-size:26px;color:var(--text);line-height:1}
+.tele-stat .l{font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
 
-.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
-.stat-item{border-left:2px solid var(--gold);padding-left:14px}
-.stat-num{font-family:var(--mono);font-size:24px;font-weight:500;color:var(--text);line-height:1}
-.stat-lbl{font-size:11px;color:var(--text3);margin-top:3px}
+/* ===== SECTION shell ===== */
+section{padding:62px 0;position:relative}
+.sec-head{margin-bottom:38px}
+.sec-tag{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:10px}
+.sec-tag .num{color:var(--faint)}
+.sec-tag .ln{flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent)}
+.sec-title{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);margin-top:14px;letter-spacing:.01em}
+.sec-lead{color:var(--dim);max-width:640px;margin-top:12px;font-size:16px}
 
-/* HERO CARD LADO DIREITO */
-.hero-card{
-  background:var(--card);
-  border:1px solid var(--border2);
-  border-radius:var(--r-lg);
-  overflow:hidden;
-}
-.hc-top{
-  background:linear-gradient(135deg,var(--navy) 0%,var(--deep) 100%);
-  padding:24px;
-  display:flex;align-items:center;gap:16px;
-  border-bottom:1px solid var(--border);
-}
-.hc-avatar{
-  width:64px;height:64px;border-radius:50%;
-  background:linear-gradient(135deg,var(--gold),#c07000);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font);font-size:22px;font-weight:700;color:#000;
-  flex-shrink:0;
-  box-shadow:0 0 0 3px rgba(232,160,32,0.25);
-}
-.hc-name{font-family:var(--font);font-size:15px;font-weight:700}
-.hc-role{font-size:11px;color:var(--text3);margin-top:3px}
-.hc-loc{font-size:11px;color:var(--gold);margin-top:4px;display:flex;align-items:center;gap:4px}
-.hc-body{padding:20px}
-.hc-skill{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:14px;
-}
-.hc-skill:last-child{margin-bottom:0}
-.hc-skill-name{font-size:12px;color:var(--text2);font-weight:500}
-.hc-skill-bar{width:140px;height:5px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
-.hc-skill-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--gold2))}
-.hc-skill-pct{font-family:var(--mono);font-size:10px;color:var(--text3)}
-.hc-footer{
-  padding:14px 20px;border-top:1px solid var(--border);
-  display:flex;gap:10px;
-}
-.hc-tag{
-  font-size:10px;font-weight:600;padding:3px 9px;border-radius:99px;
-  font-family:var(--mono);
-}
-.hc-tag-gold{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(232,160,32,.2)}
-.hc-tag-blue{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(96,165,250,.2)}
-.hc-tag-green{background:var(--green-bg);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+/* reveal */
+.rv{opacity:0;clip-path:inset(0 100% 0 0);transition:opacity .5s ease,clip-path .7s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;clip-path:inset(0 0 0 0)}
+.rv-up{opacity:0;transform:translateY(24px);transition:opacity .5s,transform .6s cubic-bezier(.16,1,.3,1)}
+.rv-up.in{opacity:1;transform:none}
 
-/* ── SECTIONS ── */
-section{position:relative;z-index:1;padding:80px 32px}
-.section-wrap{max-width:1100px;margin:0 auto}
-.section-label{
-  font-family:var(--mono);font-size:10px;font-weight:500;
-  color:var(--gold);letter-spacing:.12em;text-transform:uppercase;
-  margin-bottom:10px;
-}
-.section-title{
-  font-family:var(--font);font-size:clamp(26px,3vw,38px);
-  font-weight:700;letter-spacing:-.02em;margin-bottom:10px;
-}
-.section-sub{font-size:15px;color:var(--text2);max-width:560px;line-height:1.6;margin-bottom:48px}
+/* ===== ABOUT ===== */
+.about-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:40px}
+.about-grid p{color:var(--dim);margin-bottom:16px;font-size:16px}
+.about-grid p b{color:var(--text);font-weight:600}
+.about-grid p .c{color:var(--cyan-br);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;border:1px solid var(--line2);color:var(--dim);padding:6px 11px;transition:.2s}
+.chip:hover{border-color:var(--cyan);color:var(--cyan)}
+.about-side .panel{padding:0}
+.aside-row{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.aside-row:last-child{border-bottom:none}
+.aside-row .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
+.aside-row .v{font-family:var(--disp);font-weight:600;font-size:14px}
+.aside-row .v.c{color:var(--cyan)}
 
-/* ── SOBRE ── */
-#sobre{background:var(--navy)}
-.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.sobre-text p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:16px}
-.sobre-text p strong{color:var(--text);font-weight:600}
-.sobre-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.stag{
-  font-size:11px;font-weight:600;padding:5px 12px;border-radius:var(--r);
-  background:var(--card2);border:1px solid var(--border2);color:var(--text2);
-  font-family:var(--mono);
-}
-.sobre-cols{display:flex;flex-direction:column;gap:16px}
-.info-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);padding:18px 20px;
-}
-.info-card-title{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.09em;margin-bottom:12px}
-.info-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border)}
-.info-row:last-child{border-bottom:none}
-.ir-key{font-size:11px;color:var(--text3)}
-.ir-val{font-size:12px;color:var(--text);font-weight:500;font-family:var(--mono)}
+/* ===== SKILLS ===== */
+.skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.skill{background:linear-gradient(165deg,var(--panel),var(--deep));padding:26px 22px;position:relative;transition:.3s}
+.skill:hover{background:linear-gradient(165deg,var(--panel2),var(--panel))}
+.skill:hover.frame::before,.skill:hover.frame::after{border-color:var(--line3)}
+.skill .ico{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:.1em;margin-bottom:14px}
+.skill h3{font-family:var(--disp);font-weight:600;font-size:18px;margin-bottom:9px}
+.skill p{color:var(--dim);font-size:14px;margin-bottom:16px}
+.skill .tags{display:flex;flex-wrap:wrap;gap:6px}
+.skill .tags span{font-family:var(--mono);font-size:10.5px;color:var(--faint);border:1px solid var(--line);padding:4px 8px}
 
-/* ── HABILIDADES ── */
-#habilidades{background:var(--black)}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.skill-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r-lg);padding:22px;
-  transition:border-color .2s,transform .2s;
-}
-.skill-card:hover{border-color:rgba(232,160,32,.3);transform:translateY(-2px)}
-.skill-card-icon{font-size:28px;margin-bottom:14px}
-.skill-card-title{font-family:var(--font);font-size:14px;font-weight:700;margin-bottom:6px}
-.skill-card-sub{font-size:12px;color:var(--text3);margin-bottom:16px;line-height:1.5}
-.skill-tags{display:flex;flex-wrap:wrap;gap:6px}
-.sk-tag{font-size:10px;font-family:var(--mono);padding:3px 8px;border-radius:4px;background:rgba(255,255,255,.05);color:var(--text3);border:1px solid var(--border)}
+/* ===== PROJECTS ===== */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.filt{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);
+  color:var(--dim);padding:8px 16px;cursor:pointer;transition:.2s;background:transparent}
+.filt:hover{color:var(--cyan);border-color:var(--line2)}
+.filt.active{background:var(--cyan);color:var(--void);border-color:var(--cyan);font-weight:700}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:linear-gradient(165deg,var(--panel),var(--deep));border:1px solid var(--line);padding:24px;
+  position:relative;transition:.32s;display:flex;flex-direction:column}
+.card::before,.card::after{content:"";position:absolute;width:16px;height:16px;border:1px solid transparent;transition:border-color .3s}
+.card::before{top:8px;left:8px;border-width:1px 0 0 1px}
+.card::after{bottom:8px;right:8px;border-width:0 1px 1px 0}
+.card:hover{border-color:var(--line2);transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.card:hover::before,.card:hover::after{border-color:var(--cyan)}
+.card.feat{grid-column:1 / -1;border-color:rgba(245,184,48,.3)}
+.card.feat::before,.card.feat::after{border-color:rgba(245,184,48,.3)}
+.card.feat:hover::before,.card.feat:hover::after{border-color:var(--amber)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.lvl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border:1px solid var(--line2);color:var(--cyan)}
+.lvl.feat{border-color:var(--amber-dim);color:var(--amber)}
+.card h3{font-family:var(--disp);font-weight:700;font-size:20px;margin-bottom:10px;letter-spacing:.01em}
+.card.feat h3{font-size:24px}
+.card .desc{color:var(--dim);font-size:14.5px;margin-bottom:16px;flex:1}
+.feats{list-style:none;margin-bottom:18px}
+.feats li{font-size:13.5px;color:var(--dim);padding:5px 0 5px 18px;position:relative}
+.feats li::before{content:"▸";position:absolute;left:0;color:var(--cyan)}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.stack span{font-family:var(--mono);font-size:10.5px;color:var(--faint);border:1px solid var(--line);padding:4px 8px}
+.card-links{display:flex;gap:14px;margin-top:auto;border-top:1px solid var(--line);padding-top:14px}
+.card-links a{font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;transition:.2s}
+.card-links a:hover{color:var(--cyan-br);gap:9px}
+.feat-body{display:grid;grid-template-columns:1.1fr .9fr;gap:26px}
+.feat-vis{background:var(--void);border:1px solid var(--line);padding:18px;font-family:var(--mono);font-size:12px;align-self:stretch}
+.fv-bar{display:flex;justify-content:space-between;color:var(--faint);font-size:10px;letter-spacing:.1em;border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:12px}
+.fv-row{display:flex;justify-content:space-between;padding:6px 0;color:var(--dim)}
+.fv-row .rk{color:var(--amber)}
+.fv-row .pt{color:var(--cyan-br)}
 
-/* ── PROJETOS ── */
-#projetos{background:var(--navy)}
-.proj-filter{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
-.pf-btn{
-  font-size:11px;font-weight:600;padding:6px 14px;border-radius:99px;
-  background:transparent;border:1px solid var(--border2);color:var(--text3);
-  cursor:pointer;font-family:var(--font);transition:all .15s;
-}
-.pf-btn:hover,.pf-btn.active{background:var(--gold-bg);color:var(--gold);border-color:rgba(232,160,32,.3)}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
-.proj-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r-lg);overflow:hidden;
-  transition:border-color .2s,transform .2s;
-  display:flex;flex-direction:column;
-}
-.proj-card:hover{border-color:rgba(232,160,32,.3);transform:translateY(-3px)}
-.proj-card-top{
-  padding:22px 22px 0;
-  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
-}
-.proj-icon{font-size:28px}
-.proj-level{
-  font-size:9px;font-weight:700;padding:3px 9px;border-radius:99px;
-  font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;
-}
-.pl-init{background:var(--green-bg);color:var(--green);border:1px solid rgba(34,197,94,.2)}
-.pl-mid{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(232,160,32,.2)}
-.pl-adv{background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2)}
-.proj-card-body{padding:16px 22px;flex:1}
-.proj-title{font-family:var(--font);font-size:15px;font-weight:700;margin-bottom:8px}
-.proj-desc{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:14px}
-.proj-stack{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
-.ps-tag{font-size:10px;font-family:var(--mono);padding:2px 8px;border-radius:4px;background:rgba(255,255,255,.05);color:var(--text3);border:1px solid var(--border)}
-.proj-highlights{display:flex;flex-direction:column;gap:5px}
-.ph-item{font-size:11px;color:var(--text3);display:flex;align-items:flex-start;gap:6px}
-.ph-item::before{content:'→';color:var(--gold);flex-shrink:0;font-size:10px;margin-top:1px}
-.proj-card-footer{
-  padding:14px 22px;border-top:1px solid var(--border);
-  display:flex;gap:8px;
-}
-.btn-proj{
-  flex:1;text-align:center;padding:7px;border-radius:var(--r);
-  font-size:11px;font-weight:600;font-family:var(--font);
-  text-decoration:none;transition:all .15s;cursor:pointer;border:none;
-}
-.btn-proj-primary{background:var(--gold);color:#000}
-.btn-proj-primary:hover{background:var(--gold2)}
-.btn-proj-ghost{background:transparent;color:var(--text3);border:1px solid var(--border2)}
-.btn-proj-ghost:hover{background:var(--card2);color:var(--text2)}
+/* ===== FLEET ===== */
+.fleet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.drone{background:linear-gradient(165deg,var(--panel),var(--deep));border:1px solid var(--line);padding:26px;text-align:center;transition:.3s;position:relative}
+.drone:hover{border-color:var(--line2);transform:translateY(-4px)}
+.drone .glyph{font-size:40px;margin-bottom:10px;filter:drop-shadow(0 0 14px rgba(56,189,248,.4))}
+.drone .cn{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:.05em;color:var(--cyan)}
+.drone .md{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:4px;letter-spacing:.05em}
+.drone .role{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
 
-/* DESTAQUE SAAS */
-.proj-featured{
-  grid-column:1/-1;
-  display:grid;grid-template-columns:1fr 1fr;
-  background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);
-  border:1px solid rgba(232,160,32,.2);
-}
-.proj-featured .proj-card-body{padding:28px}
-.proj-featured .proj-title{font-size:20px}
-.proj-featured-badge{
-  display:inline-block;
-  font-size:9px;font-weight:700;padding:3px 10px;border-radius:99px;
-  background:linear-gradient(90deg,var(--gold),var(--gold2));color:#000;
-  font-family:var(--mono);letter-spacing:.06em;margin-bottom:12px;
-}
-.proj-featured-preview{
-  background:var(--black);
-  display:flex;align-items:center;justify-content:center;
-  font-size:60px;
-  border-left:1px solid var(--border);
-}
+/* ===== EXPERIENCE ===== */
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--cyan),var(--line))}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item::before{content:"";position:absolute;left:-27px;top:6px;width:11px;height:11px;border:2px solid var(--cyan);background:var(--void);border-radius:50%;box-shadow:0 0 12px rgba(56,189,248,.5)}
+.tl-date{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--cyan)}
+.tl-role{font-family:var(--disp);font-weight:700;font-size:18px;margin:5px 0 2px}
+.tl-org{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-bottom:12px}
+.tl-list{list-style:none}
+.tl-list li{font-size:14px;color:var(--dim);padding:4px 0 4px 18px;position:relative}
+.tl-list li::before{content:"–";position:absolute;left:0;color:var(--faint)}
+/* ops console (fills experience void) */
+.ops-console{position:sticky;top:88px}
+.roadmap{position:relative;margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+.rm-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--faint);margin-bottom:14px}
+.rm-step{font-family:var(--body);font-size:13px;color:var(--dim);display:flex;align-items:flex-start;gap:12px;padding:8px 0;position:relative}
+.rm-step .rm-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--faint);flex-shrink:0;margin-top:4px}
+.rm-step::before{content:"";position:absolute;left:3.5px;top:18px;bottom:-8px;width:1.5px;background:var(--line)}
+.rm-step:last-child::before{display:none}
+.rm-step.done{color:var(--text)}
+.rm-step.done .rm-dot{background:var(--green);border-color:var(--green);box-shadow:0 0 8px var(--green)}
+.rm-step.done::before{background:rgba(52,211,153,.4)}
+.rm-step.active{color:var(--cyan-br)}
+.rm-step.active .rm-dot{border-color:var(--cyan);background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 2.4s infinite}
+.rm-step small{display:block;font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em;margin-top:2px}
+/* HUD side rails (fill wide-screen margins) */
+.siderail{position:fixed;top:0;bottom:0;width:40px;z-index:40;pointer-events:none;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.siderail.left{left:0;border-right:1px solid var(--line)}
+.siderail.right{right:0;border-left:1px solid var(--line)}
+.siderail::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 46px,var(--line) 46px 47px);opacity:.5}
+.siderail .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.32em;color:var(--faint);opacity:.6;writing-mode:vertical-rl;white-space:nowrap}
+.siderail.left .lbl{transform:rotate(180deg)}
+.siderail .tick{position:absolute;top:18px;font-family:var(--mono);font-size:9px;color:var(--cyan-dim);letter-spacing:.1em}
+.siderail.left .tick{transform:rotate(180deg);writing-mode:vertical-rl}
+.siderail.right .tick{writing-mode:vertical-rl;bottom:18px;top:auto}
 
-/* ── EXPERIÊNCIA ── */
-#experiencia{background:var(--black)}
-.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
-.exp-col-title{
-  font-family:var(--mono);font-size:10px;color:var(--text3);
-  text-transform:uppercase;letter-spacing:.1em;margin-bottom:20px;
-  padding-bottom:8px;border-bottom:1px solid var(--border);
-}
-.exp-item{margin-bottom:28px;padding-left:20px;border-left:2px solid var(--border2);position:relative}
-.exp-item::before{content:'';position:absolute;left:-5px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
-.exp-company{font-family:var(--font);font-size:14px;font-weight:700;margin-bottom:2px}
-.exp-role{font-size:12px;color:var(--gold);font-weight:600;margin-bottom:4px}
-.exp-period{font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:10px}
-.exp-desc{font-size:12px;color:var(--text2);line-height:1.6}
-.exp-desc li{list-style:none;padding:3px 0;display:flex;gap:7px}
-.exp-desc li::before{content:'▸';color:var(--gold);flex-shrink:0;font-size:10px;margin-top:2px}
+/* ===== CERTS ===== */
+.cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cert{background:linear-gradient(165deg,var(--panel),var(--deep));border:1px solid var(--line);padding:20px;transition:.3s}
+.cert:hover{border-color:var(--line2);transform:translateY(-3px)}
+.cert .ct{font-family:var(--disp);font-weight:600;font-size:15px;margin-bottom:6px}
+.cert .co{font-size:12px;color:var(--dim);min-height:32px}
+.cert .badge{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-top:12px;display:inline-block;padding:3px 9px;border:1px solid}
+.badge.ativo{color:var(--green);border-color:rgba(52,211,153,.4)}
+.badge.prev{color:var(--amber);border-color:rgba(245,184,48,.4)}
+.badge.est{color:var(--cyan);border-color:var(--line2)}
+/* credentials groups */
+.cred-block{margin-bottom:46px}
+.cred-block:last-child{margin-bottom:0}
+.cred-sub{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.cred-sub .tag{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--line2);padding:6px 13px}
+.cred-sub .ln{flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent)}
+.cert-org{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+.dev-cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.dev-cert-grid .co{min-height:auto}
+.stack-panel{background:linear-gradient(160deg,var(--panel),var(--deep));border:1px solid var(--line);padding:24px}
+.stack-panel .sp-h{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:16px}
 
-/* ── CERTIFICAÇÕES ── */
-#certificacoes{background:var(--navy)}
-.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-.cert-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);padding:16px 18px;
-  display:flex;align-items:flex-start;gap:12px;
-  transition:border-color .15s;
-}
-.cert-card:hover{border-color:rgba(232,160,32,.3)}
-.cert-icon{font-size:22px;flex-shrink:0;margin-top:2px}
-.cert-name{font-size:12px;font-weight:600;margin-bottom:2px}
-.cert-org{font-size:10px;color:var(--text3)}
-.cert-status{
-  margin-top:8px;font-size:9px;font-weight:700;padding:2px 8px;
-  border-radius:99px;font-family:var(--mono);display:inline-block;
-}
-.cs-ativo{background:var(--green-bg);color:var(--green);border:1px solid rgba(34,197,94,.2)}
-.cs-previsto{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(96,165,250,.2)}
+/* ===== CONTACT ===== */
+.contact{text-align:center;padding:74px 0}
+.contact .sec-title{font-size:clamp(30px,5vw,52px)}
+.contact p{color:var(--dim);max-width:560px;margin:18px auto 0;font-size:16px}
+.cc-links{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+.note{font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:30px;letter-spacing:.04em}
 
-/* ── CONTATO ── */
-#contato{background:var(--black)}
-.contato-wrap{
-  max-width:680px;margin:0 auto;text-align:center;
-}
-.contato-title{
-  font-family:var(--font);font-size:clamp(28px,4vw,46px);
-  font-weight:700;letter-spacing:-.02em;margin-bottom:14px;
-}
-.contato-sub{font-size:15px;color:var(--text2);margin-bottom:40px;line-height:1.6}
-.contato-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.contato-link{
-  display:flex;align-items:center;gap:9px;
-  padding:13px 24px;border-radius:var(--r);
-  font-size:13px;font-weight:600;font-family:var(--font);
-  text-decoration:none;transition:all .15s;
-}
-.cl-linkedin{background:rgba(10,102,194,.15);color:#60a5fa;border:1px solid rgba(96,165,250,.2)}
-.cl-linkedin:hover{background:rgba(10,102,194,.25)}
-.cl-github{background:rgba(255,255,255,.06);color:var(--text2);border:1px solid var(--border2)}
-.cl-github:hover{background:rgba(255,255,255,.1);color:var(--text)}
-.cl-email{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(232,160,32,.2)}
-.cl-email:hover{background:rgba(232,160,32,.18)}
-.contato-note{
-  margin-top:40px;padding:16px 20px;
-  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  font-size:12px;color:var(--text3);line-height:1.6;
-}
-.contato-note strong{color:var(--text2)}
+/* ===== FOOTER / status bar ===== */
+.statusbar{position:fixed;bottom:0;left:0;right:0;z-index:70;background:rgba(4,7,12,.85);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--faint)}
+.sb-in{max-width:var(--maxw);margin:0 auto;padding:9px 24px;display:flex;justify-content:space-between;align-items:center}
+.sb-l{display:flex;gap:18px;align-items:center}
+.sb-l .g{color:var(--green)}
+.sb-l .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
+.sb-r{color:var(--cyan)}
+footer{padding:60px 0 70px;border-top:1px solid var(--line);text-align:center}
+footer .fb{font-family:var(--disp);font-weight:700;font-size:17px}
+footer .fb b{color:var(--cyan)}
+footer p{color:var(--faint);font-family:var(--mono);font-size:11.5px;margin-top:10px;letter-spacing:.05em}
 
-/* ── FOOTER ── */
-footer{
-  background:var(--navy);border-top:1px solid var(--border);
-  padding:24px 32px;display:flex;align-items:center;justify-content:space-between;
-  position:relative;z-index:1;
-}
-.footer-left{font-family:var(--mono);font-size:11px;color:var(--text3)}
-.footer-right{font-size:11px;color:var(--text3)}
-
-/* ── MOBILE NAV ── */
-.hamburger{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:4px}
-
-/* ── ANIMAÇÕES SCROLL ── */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-/* ── TOOLTIP MODAL PROJETO ── */
-.proj-modal-overlay{
-  position:fixed;inset:0;z-index:200;
-  background:rgba(0,0,0,.8);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;padding:20px;
-  opacity:0;pointer-events:none;transition:opacity .2s;
-}
-.proj-modal-overlay.open{opacity:1;pointer-events:all}
-.proj-modal{
-  background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);
-  width:100%;max-width:600px;max-height:90vh;overflow-y:auto;
-  transform:scale(.96);transition:transform .2s;
-}
-.proj-modal-overlay.open .proj-modal{transform:scale(1)}
-.pm-header{
-  padding:22px 24px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.pm-title{font-family:var(--font);font-size:17px;font-weight:700}
-.pm-close{
-  width:28px;height:28px;border-radius:6px;background:rgba(255,255,255,.06);
-  border:none;color:var(--text3);cursor:pointer;font-size:18px;
-  display:flex;align-items:center;justify-content:center;transition:all .15s;
-}
-.pm-close:hover{background:rgba(248,113,113,.15);color:var(--red)}
-.pm-body{padding:24px}
-.pm-section{margin-bottom:20px}
-.pm-lbl{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px}
-.pm-text{font-size:13px;color:var(--text2);line-height:1.6}
-.pm-feat-list{display:flex;flex-direction:column;gap:6px}
-.pm-feat{font-size:12px;color:var(--text2);display:flex;gap:8px}
-.pm-feat::before{content:'✓';color:var(--green);flex-shrink:0}
-.pm-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:9px}
-
-/* ── RESPONSIVE ── */
+/* ===== RESPONSIVE ===== */
 @media(max-width:900px){
-  .hero-wrap{grid-template-columns:1fr}
-  .hero-card{display:none}
-  .sobre-grid,.exp-grid,.proj-featured{grid-template-columns:1fr}
-  .proj-featured-preview{display:none}
-  nav .nav-links,.nav-cta{display:none}
+  .ops-console{position:static}
+  .hero-grid,.about-grid,.feat-body{grid-template-columns:1fr;gap:28px}
+  .skill-grid,.cert-grid,.dev-cert-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-grid{grid-template-columns:1fr}
+  .fleet-grid{grid-template-columns:1fr}
+  .radar{display:none}
+  .nav-links,.nav-cta{display:none}
+  .burger{display:block}
+  nav.open .nav-links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;
+    background:rgba(4,7,12,.97);padding:18px 24px;gap:16px;border-bottom:1px solid var(--line)}
 }
-@media(max-width:600px){
-  section{padding:60px 18px}
-  nav{padding:0 18px}
-  .hero{padding:80px 18px 50px}
-  .projects-grid{grid-template-columns:1fr}
-  footer{flex-direction:column;gap:8px;text-align:center}
+@media(max-width:520px){
+  .skill-grid,.cert-grid{grid-template-columns:1fr}
+  .dev-cert-grid{grid-template-columns:1fr}
+  .tele-stats{grid-template-columns:repeat(3,1fr)}
+  header{padding:120px 0 50px}
+}
+/* accessibility */
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+@media(max-width:1320px){.siderail{display:none}}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto}
+  .rv,.rv-up{opacity:1;clip-path:none;transform:none}
+  #boot{display:none}
+  .radar .sweep{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#inicio">
-    <div class="nav-logo-dot"></div>
-    WO.dev
-  </a>
-  <div class="nav-links">
-    <a href="#sobre">Sobre</a>
-    <a href="#habilidades">Skills</a>
-    <a href="#projetos">Projetos</a>
-    <a href="#experiencia">Experiência</a>
-    <a href="#contato">Contato</a>
+<!-- BOOT LOADER -->
+<div id="boot">
+  <div class="boot-box">
+    <div class="boot-head"><span>WO//GCS</span><span>GROUND CONTROL STATION</span></div>
+    <div class="boot-lines" id="bootLines"></div>
+    <div class="boot-bar"><i id="bootBar"></i></div>
+    <div class="boot-pct"><span id="bootStat">INICIALIZANDO</span><span id="bootPct">0%</span></div>
   </div>
-  <a class="nav-cta" href="#contato">Entrar em contato</a>
+</div>
+
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+<div class="scanlines"></div>
+<div class="siderail left" aria-hidden="true"><span class="lbl">GCS // WO.DEV · CAMPOS BASIN</span><span class="tick">22.9°S</span></div>
+<div class="siderail right" aria-hidden="true"><span class="lbl">SISTEMA ONLINE · RPAS OFFSHORE</span><span class="tick">043.2°W</span></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="#top" class="brand"><span class="dot"></span>WO<b>.dev</b></a>
+    <div class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#skills">Skills</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#frota">Frota</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a href="#credenciais">Formação</a>
+    </div>
+    <a href="#contato" class="nav-cta">Estabelecer contato</a>
+    <button class="burger" id="burger" aria-label="Menu">≡</button>
+  </div>
 </nav>
 
 <!-- HERO -->
-<section id="inicio" class="hero">
-  <div class="hero-bg"></div>
-  <div class="radar-ring" style="width:400px;height:400px"></div>
-  <div class="radar-ring" style="width:650px;height:650px;animation-delay:1s"></div>
-  <div class="radar-ring" style="width:900px;height:900px;animation-delay:2s"></div>
-
-  <div class="hero-wrap">
-    <div class="hero-left">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-dot"></span>
-        Status: voando alto
-      </div>
-      <h1>
-        <span class="name-highlight">William Oliveira</span>
-        <span class="role-line">Desenvolvedor · Dados & IA<br>com DNA Offshore</span>
-      </h1>
-      <p class="hero-desc">
-        Desenvolvo <strong>software, pipelines de dados e soluções de IA</strong> para o setor de óleo e gás — com um diferencial raro: anos de operação RPAS embarcado em OSRVs. Não desenvolvo para o offshore "de fora". Desenvolvo a partir de quem opera lá dentro.
-      </p>
-      <div class="hero-actions">
-        <a href="#projetos" class="btn-hero-primary">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h10M3 8h6M3 12h8"/></svg>
-          Ver projetos
-        </a>
-        <a href="https://linkedin.com/in/wmdevoffshore" target="_blank" class="btn-hero-ghost">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">8</div>
-          <div class="stat-lbl">Projetos no ar · full-stack</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">0</div>
-          <div class="stat-lbl">Crashes — no voo e no código</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">100%</div>
-          <div class="stat-lbl">Alto mar · alta performance</div>
+<header id="top">
+  <div class="radar" aria-hidden="true">
+    <div class="ring" style="width:100%;height:100%"></div>
+    <div class="ring" style="width:72%;height:72%"></div>
+    <div class="ring" style="width:44%;height:44%"></div>
+    <div class="sweep"></div>
+    <div class="blip" style="top:30%;left:62%"></div>
+    <div class="blip" style="top:58%;left:40%;background:var(--amber);box-shadow:0 0 10px var(--amber)"></div>
+    <div class="blip" style="top:46%;left:74%"></div>
+  </div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow"><span class="ln"></span>Sistema operacional · Online</span>
+        <h1 class="h-name"><span class="glitch" data-t="William Oliveira">William Oliveira</span></h1>
+        <p class="h-sub">Desenvolvedor · Dados &amp; IA com DNA Offshore</p>
+        <p class="h-desc">Construo software, pipelines de dados e soluções de IA para o setor de óleo &amp; gás — com um diferencial raro: anos de operação <b>RPAS embarcado</b> em embarcações de resposta a derramamento nas bacias de Campos e Santos. <b>Não desenvolvo para o offshore de fora. Desenvolvo a partir de quem opera lá dentro.</b></p>
+        <div class="h-cta">
+          <a href="https://github.com/TheDevOffshore" target="_blank" rel="noopener" class="btn btn-pri">▸ Ver missões</a>
+          <a href="mailto:wm.dev.offshore@gmail.com" class="btn btn-gho">E-mail</a>
+          <a href="https://www.linkedin.com/in/wmdevoffshore/" target="_blank" rel="noopener" class="btn btn-gho">LinkedIn</a>
         </div>
       </div>
-    </div>
-
-    <!-- CARD LADO DIREITO -->
-    <div class="hero-card">
-      <div class="hc-top">
-        <div class="hc-avatar">WO</div>
-        <div>
-          <div class="hc-name">William Oliveira</div>
-          <div class="hc-role">Desenvolvedor · Dados & IA · RPAS Offshore</div>
-          <div class="hc-loc">
-            <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a4 4 0 100 8A4 4 0 008 2zM8 14s-5-3-5-6a5 5 0 0110 0c0 3-5 6-5 6z"/></svg>
-            São José dos Campos — SP · Brasil
-          </div>
+      <div class="panel frame" id="teleCard">
+        <div class="tele-top">
+          <span class="id">WO-01 · OPERADOR</span>
+          <span class="st">● ATIVO</span>
         </div>
-      </div>
-      <div class="hc-body">
-        <div class="hc-skill">
-          <span class="hc-skill-name">Operações RPAS</span>
-          <div class="hc-skill-bar"><div class="hc-skill-fill" style="width:95%"></div></div>
-          <span class="hc-skill-pct">95%</span>
+        <div class="tele-row"><span>CALLSIGN</span><span>TheDevOffshore</span></div>
+        <div class="tele-row"><span>BASE</span><span>São José dos Campos · SP</span></div>
+        <div class="tele-row"><span>STACK</span><span>Python · FastAPI · JS</span></div>
+        <div class="tele-row"><span>DOMÍNIO</span><span>RPAS Offshore · Oil &amp; Gas</span></div>
+        <div class="tele-row"><span>CERTS</span><span>ANAC · DECEA · SARPAS · NR-34</span></div>
+        <div class="tele-stats">
+          <div class="tele-stat"><div class="n" data-count="12">0</div><div class="l">Projetos no ar</div></div>
+          <div class="tele-stat"><div class="n" data-count="3" data-suffix="">0</div><div class="l">Aeronaves DJI</div></div>
+          <div class="tele-stat"><div class="n" data-count="0">0</div><div class="l">Crashes</div></div>
         </div>
-        <div class="hc-skill">
-          <span class="hc-skill-name">JavaScript / HTML</span>
-          <div class="hc-skill-bar"><div class="hc-skill-fill" style="width:78%"></div></div>
-          <span class="hc-skill-pct">78%</span>
-        </div>
-        <div class="hc-skill">
-          <span class="hc-skill-name">Python / FastAPI</span>
-          <div class="hc-skill-bar"><div class="hc-skill-fill" style="width:65%"></div></div>
-          <span class="hc-skill-pct">65%</span>
-        </div>
-        <div class="hc-skill">
-          <span class="hc-skill-name">Análise de Dados</span>
-          <div class="hc-skill-bar"><div class="hc-skill-fill" style="width:60%"></div></div>
-          <span class="hc-skill-pct">60%</span>
-        </div>
-        <div class="hc-skill">
-          <span class="hc-skill-name">Compliance ANAC/DECEA</span>
-          <div class="hc-skill-bar"><div class="hc-skill-fill" style="width:90%"></div></div>
-          <span class="hc-skill-pct">90%</span>
-        </div>
-      </div>
-      <div class="hc-footer">
-        <span class="hc-tag hc-tag-gold">RPAS Offshore</span>
-        <span class="hc-tag hc-tag-blue">Dev</span>
-        <span class="hc-tag hc-tag-green">São José dos Campos</span>
       </div>
     </div>
   </div>
-</section>
+</header>
 
 <!-- SOBRE -->
 <section id="sobre">
-  <div class="section-wrap">
-    <div class="section-label">Sobre mim</div>
-    <div class="section-title">Operações críticas.<br>Código com propósito.</div>
-    <div class="sobre-grid reveal">
-      <div class="sobre-text">
-        <p>Sou um <strong>profissional híbrido</strong>: desenvolvedor de software com foco em <strong>dados e IA</strong>, construindo soluções tecnológicas para os problemas que vivo em campo — aplicações full-stack, pipelines de visão computacional (YOLOv8), automação de análise de dados em Python e ferramentas de IA para documentação operacional.</p>
-        <p>Minha base operacional vem da atuação como <strong>Piloto de RPAS Offshore</strong>, operando DJI M300 RTK, M30T e M350 RTK embarcado em OSRVs (Oil Spill Response Vessels) nas bacias de Campos e Santos, com certificações ANAC, DECEA e NR-34. É isso que me dá um posicionamento raro no setor: entendo profundamente o problema antes de escrever a primeira linha de código.</p>
-        <p>Busco atuar na interseção de <strong>tecnologia e operações críticas</strong> — como desenvolvedor, analista de dados ou engenheiro de IA para o setor de óleo e gás, defesa ou aviação não tripulada.</p>
-        <div class="sobre-tags">
-          <span class="stag">Python · FastAPI</span>
-          <span class="stag">HTML · CSS · JS</span>
-          <span class="stag">Visão Computacional</span>
-          <span class="stag">Análise de Dados</span>
-          <span class="stag">Git · GitHub</span>
-          <span class="stag">ANAC / SARPAS</span>
-          <span class="stag">DJI Enterprise</span>
-          <span class="stag">NR-34 Offshore</span>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-tag"><span class="num">[01]</span> Perfil do operador <span class="ln"></span></div>
+      <h2 class="sec-title">Operações críticas. Código com propósito.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="rv-up">
+        <p>Sou um profissional <b>híbrido</b>: desenvolvedor de software com foco em <span class="c">dados e IA</span>, construindo soluções tecnológicas para os problemas que vivo em campo — aplicações full-stack, agentes de IA com tool-calling, pipelines de visão computacional e automação de análise de dados em Python.</p>
+        <p>Minha base operacional vem da atuação como <b>Piloto de RPAS Offshore</b>, operando DJI M300 RTK, M30T e M350 RTK embarcado em OSRVs (Oil Spill Response Vessels) nas bacias de Campos e Santos, com certificações <b>ANAC, DECEA e NR-34</b>.</p>
+        <p>É isso que me dá um posicionamento raro no setor: <b>entendo profundamente o problema antes de escrever a primeira linha de código.</b> Busco atuar na interseção de tecnologia e operações críticas — como desenvolvedor, analista de dados ou engenheiro de IA para óleo &amp; gás, defesa ou aviação não tripulada.</p>
+        <div class="chips">
+          <span class="chip">Python · FastAPI</span>
+          <span class="chip">JavaScript · HTML · CSS</span>
+          <span class="chip">Agentes de IA · Tool-calling</span>
+          <span class="chip">Visão Computacional</span>
+          <span class="chip">Análise de Dados</span>
+          <span class="chip">Git · GitHub</span>
+          <span class="chip">DJI Enterprise</span>
+          <span class="chip">ANAC / SARPAS / DECEA</span>
         </div>
       </div>
-      <div class="sobre-cols">
-        <div class="info-card">
-          <div class="info-card-title">Dados profissionais</div>
-          <div class="info-row"><span class="ir-key">Localização</span><span class="ir-val">São José dos Campos — SP</span></div>
-          <div class="info-row"><span class="ir-key">Cargo</span><span class="ir-val">Dev · Dados & IA · Piloto RPAS</span></div>
-          <div class="info-row"><span class="ir-key">Localização</span><span class="ir-val">Brasil</span></div>
-          <div class="info-row"><span class="ir-key">LinkedIn</span><span class="ir-val">wmdevoffshore</span></div>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">Esquadrão (sim, eles têm nome)</div>
-          <div class="info-row"><span class="ir-key">HERCULES · DJI M30T</span><span class="ir-val" style="color:var(--gold)">Principal</span></div>
-          <div class="info-row"><span class="ir-key">ZEUS · DJI M300 RTK</span><span class="ir-val" style="color:var(--gold)">Principal</span></div>
-          <div class="info-row"><span class="ir-key">ATLAS · DJI M350 RTK</span><span class="ir-val" style="color:var(--text3)">Reserva tática</span></div>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">Áreas de interesse</div>
-          <div class="info-row"><span class="ir-key">Desenvolvimento Web</span><span class="ir-val" style="color:var(--green)">✓</span></div>
-          <div class="info-row"><span class="ir-key">Análise de Dados</span><span class="ir-val" style="color:var(--green)">✓</span></div>
-          <div class="info-row"><span class="ir-key">Sistemas RPAS</span><span class="ir-val" style="color:var(--green)">✓</span></div>
-          <div class="info-row"><span class="ir-key">Visão Computacional</span><span class="ir-val" style="color:var(--blue)">Em estudo</span></div>
+      <div class="about-side rv-up">
+        <div class="panel frame" style="padding:0">
+          <div class="aside-row"><span class="k">Localização</span><span class="v">São José dos Campos — SP</span></div>
+          <div class="aside-row"><span class="k">Cargo</span><span class="v c">Dev · Dados &amp; IA · RPAS</span></div>
+          <div class="aside-row"><span class="k">Modalidade</span><span class="v">Remoto · Híbrido</span></div>
+          <div class="aside-row"><span class="k">GitHub</span><span class="v c">TheDevOffshore</span></div>
+          <div class="aside-row"><span class="k">LinkedIn</span><span class="v c">wmdevoffshore</span></div>
+          <div class="aside-row"><span class="k">Status</span><span class="v" style="color:var(--green)">Disponível</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HABILIDADES -->
-<section id="habilidades">
-  <div class="section-wrap">
-    <div class="section-label">Habilidades</div>
-    <div class="section-title">O que eu faço</div>
-    <p class="section-sub">Combinação única de expertise operacional em ambientes críticos com desenvolvimento de software aplicado ao setor.</p>
-    <div class="skills-grid reveal">
-      <div class="skill-card">
-        <div class="skill-card-icon">💻</div>
-        <div class="skill-card-title">Desenvolvimento Web</div>
-        <div class="skill-card-sub">Criação de aplicações web focadas em operações industriais, dashboards e ferramentas para óleo e gás.</div>
-        <div class="skill-tags">
-          <span class="sk-tag">HTML</span><span class="sk-tag">CSS</span><span class="sk-tag">JavaScript</span><span class="sk-tag">React</span><span class="sk-tag">Git</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-icon">🐍</div>
-        <div class="skill-card-title">Back-end & APIs</div>
-        <div class="skill-card-sub">Desenvolvimento de APIs REST em Python com FastAPI, integração com serviços externos e automação de processos.</div>
-        <div class="skill-tags">
-          <span class="sk-tag">Python</span><span class="sk-tag">FastAPI</span><span class="sk-tag">REST API</span><span class="sk-tag">HTTPX</span><span class="sk-tag">Pydantic</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-icon">📊</div>
-        <div class="skill-card-title">Análise de Dados</div>
-        <div class="skill-card-sub">Visualização e análise de dados operacionais, geração de relatórios e extração de insights de missões RPAS.</div>
-        <div class="skill-tags">
-          <span class="sk-tag">CSV/Excel</span><span class="sk-tag">Chart.js</span><span class="sk-tag">Leaflet.js</span><span class="sk-tag">Meteo API</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-icon">🛸</div>
-        <div class="skill-card-title">Operações RPAS Offshore</div>
-        <div class="skill-card-sub">Pilotagem de drones embarcado em OSRVs, planejamento regulatório e gestão de missões críticas.</div>
-        <div class="skill-tags">
-          <span class="sk-tag">DJI M300 RTK</span><span class="sk-tag">M30T</span><span class="sk-tag">SARPAS</span><span class="sk-tag">ANAC</span><span class="sk-tag">DECEA</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-icon">📋</div>
-        <div class="skill-card-title">Compliance Regulatório</div>
-        <div class="skill-card-sub">Conhecimento profundo da regulamentação ANAC, DECEA e procedimentos SARPAS para operações RPAS no Brasil.</div>
-        <div class="skill-tags">
-          <span class="sk-tag">RBAC-E 94</span><span class="sk-tag">ICA 100-40</span><span class="sk-tag">SISANT</span><span class="sk-tag">NR-34</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-icon">🗺️</div>
-        <div class="skill-card-title">Cartografia & Fotogrametria</div>
-        <div class="skill-card-sub">Planejamento de missões de mapeamento, processamento de imagens aéreas e geração de ortofotos.</div>
-        <div class="skill-tags">
-          <span class="sk-tag">Pix4D</span><span class="sk-tag">DroneDeploy</span><span class="sk-tag">RTK GPS</span><span class="sk-tag">Termografia</span>
-        </div>
-      </div>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-tag"><span class="num">[02]</span> Matriz de capacidades <span class="ln"></span></div>
+      <h2 class="sec-title">O que eu construo</h2>
+      <p class="sec-lead">Expertise operacional em ambientes críticos somada a desenvolvimento de software aplicado ao setor.</p>
+    </div>
+    <div class="skill-grid">
+      <div class="skill frame rv-up"><div class="ico">// 01</div><h3>Back-end &amp; APIs</h3><p>APIs REST em Python/FastAPI, integração com serviços externos, automação e persistência de dados.</p><div class="tags"><span>Python</span><span>FastAPI</span><span>SQLite</span><span>Pydantic</span><span>HTTPX</span></div></div>
+      <div class="skill frame rv-up"><div class="ico">// 02</div><h3>IA &amp; Agentes</h3><p>Agentes com tool-calling sobre a API da Claude, RAG, NLP em português e automação analítica.</p><div class="tags"><span>Claude API</span><span>Tool-calling</span><span>RAG</span><span>Pandas</span></div></div>
+      <div class="skill frame rv-up"><div class="ico">// 03</div><h3>Front-end &amp; Web</h3><p>Aplicações web e dashboards focados em operações industriais e visualização de dados em tempo real.</p><div class="tags"><span>JavaScript</span><span>HTML/CSS</span><span>React</span><span>Chart.js</span><span>Leaflet</span></div></div>
+      <div class="skill frame rv-up"><div class="ico">// 04</div><h3>Visão Computacional</h3><p>Pipelines de detecção de anomalias em estruturas offshore a partir de imagens de inspeção.</p><div class="tags"><span>YOLOv8</span><span>Roboflow</span><span>OpenCV</span><span>Termografia</span></div></div>
+      <div class="skill frame rv-up"><div class="ico">// 05</div><h3>RPAS Offshore</h3><p>Pilotagem de drones embarcado em OSRVs, planejamento regulatório e gestão de missões críticas.</p><div class="tags"><span>DJI M300 RTK</span><span>M30T</span><span>M350 RTK</span><span>SARPAS</span></div></div>
+      <div class="skill frame rv-up"><div class="ico">// 06</div><h3>Compliance Regulatório</h3><p>Domínio da regulamentação ANAC, DECEA e procedimentos SARPAS para operações RPAS no Brasil.</p><div class="tags"><span>RBAC-E 94</span><span>ICA 100-40</span><span>SISANT</span><span>NR-34</span></div></div>
     </div>
   </div>
 </section>
 
 <!-- PROJETOS -->
 <section id="projetos">
-  <div class="section-wrap">
-    <div class="section-label">Portfólio</div>
-    <div class="section-title">Projetos desenvolvidos</div>
-    <p class="section-sub">Aplicações reais criadas para resolver problemas que vivo no dia a dia como piloto offshore. Cada projeto nasce de uma necessidade operacional concreta.</p>
-
-    <div class="proj-filter">
-      <button class="pf-btn active" data-filter="all">Todos</button>
-      <button class="pf-btn" data-filter="frontend">Front-end</button>
-      <button class="pf-btn" data-filter="backend">Back-end</button>
-      <button class="pf-btn" data-filter="saas">SaaS</button>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-tag"><span class="num">[03]</span> Registro de missões <span class="ln"></span></div>
+      <h2 class="sec-title">Projetos no ar</h2>
+      <p class="sec-lead">Aplicações reais para resolver problemas que vivo no dia a dia offshore. Cada projeto nasce de uma necessidade operacional concreta.</p>
     </div>
+    <div class="filters rv-up">
+      <button class="filt active" data-f="all">Todos</button>
+      <button class="filt" data-f="ia">IA &amp; Dados</button>
+      <button class="filt" data-f="back">Back-end</button>
+      <button class="filt" data-f="front">Front-end</button>
+    </div>
+    <div class="proj-grid" id="projGrid">
 
-    <div class="projects-grid" id="proj-grid">
-
-      <!-- DESTAQUE: PLATAFORMA SAAS -->
-      <div class="proj-card proj-featured" data-cat="saas frontend">
-        <div class="proj-card-body">
-          <div class="proj-featured-badge">⭐ PROJETO DESTAQUE</div>
-          <div class="proj-title">Plataforma de Gestão RPAS</div>
-          <p class="proj-desc">SaaS completo de gestão operacional para frotas de drones offshore. Autenticação multi-perfil, 8 módulos (missões, frota, manutenção, compliance, kanban, relatórios), alertas em tempo real e exportação CSV.</p>
-          <div class="proj-stack">
-            <span class="ps-tag">HTML</span><span class="ps-tag">CSS</span><span class="ps-tag">JavaScript</span><span class="ps-tag">LocalStorage</span><span class="ps-tag">SaaS</span>
+      <!-- FEATURED -->
+      <article class="card feat rv-up" data-cat="back ia front">
+        <div class="card-top">
+          <span class="lvl feat">★ Projeto destaque</span>
+        </div>
+        <div class="feat-body">
+          <div>
+            <h3>RPAS Offshore Ranking System</h3>
+            <p class="desc">Sistema tático de ranking operacional para pilotos RPAS em operações offshore de óleo &amp; gás. Construído a partir da experiência real em embarcações de oil recovery — porque quem desenvolveu a ferramenta opera lá dentro.</p>
+            <ul class="feats">
+              <li>Backend FastAPI + SQLite com scoring operacional</li>
+              <li>Insígnias de patente em SVG (inspiração USAF)</li>
+              <li>Mapa tático Leaflet.js com plataformas offshore</li>
+              <li>Frontend vanilla JS, esquema azul aeronáutico</li>
+            </ul>
+            <div class="stack"><span>FastAPI</span><span>SQLite</span><span>JavaScript</span><span>Leaflet.js</span><span>SVG</span></div>
+            <div class="card-links">
+              <a href="https://github.com/TheDevOffshore/RPAS-Offshore-Ranking" target="_blank" rel="noopener">GitHub →</a>
+            </div>
           </div>
-          <div class="proj-highlights">
-            <div class="ph-item">Login com 3 perfis — Piloto, Gerente, Compliance</div>
-            <div class="ph-item">Gestão de frota com alertas automáticos de manutenção</div>
-            <div class="ph-item">Kanban de tarefas operacionais integrado</div>
-            <div class="ph-item">Compliance regulatório com rastreio de vencimentos</div>
-          </div>
-        </div>
-
-        <!-- PREVIEW SVG DO APP -->
-        <div class="proj-featured-preview" style="padding:0;overflow:hidden;background:#080c10">
-          <svg viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
-            <defs>
-              <linearGradient id="goldG" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#e8a020"/>
-                <stop offset="100%" style="stop-color:#f5b830"/>
-              </linearGradient>
-              <linearGradient id="greenG" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#22c55e"/>
-                <stop offset="100%" style="stop-color:#4ade80"/>
-              </linearGradient>
-            </defs>
-
-            <!-- BG -->
-            <rect width="420" height="280" fill="#080c10"/>
-
-            <!-- SIDEBAR -->
-            <rect x="0" y="0" width="72" height="280" fill="#0d1f3c" rx="0"/>
-            <!-- logo -->
-            <rect x="14" y="14" width="22" height="22" rx="5" fill="#e8a020"/>
-            <text x="25" y="29" text-anchor="middle" fill="#000" font-size="10" font-weight="700" font-family="monospace">🛰</text>
-            <!-- nav items -->
-            <rect x="10" y="48" width="52" height="18" rx="4" fill="rgba(232,160,32,0.15)"/>
-            <text x="36" y="60" text-anchor="middle" fill="#e8a020" font-size="7" font-family="sans-serif" font-weight="600">Dashboard</text>
-            <rect x="10" y="70" width="52" height="18" rx="4" fill="transparent"/>
-            <text x="36" y="82" text-anchor="middle" fill="#4d6480" font-size="7" font-family="sans-serif">Missões</text>
-            <rect x="10" y="92" width="52" height="18" rx="4" fill="transparent"/>
-            <text x="36" y="104" text-anchor="middle" fill="#4d6480" font-size="7" font-family="sans-serif">Frota</text>
-            <rect x="10" y="114" width="52" height="18" rx="4" fill="transparent"/>
-            <text x="36" y="126" text-anchor="middle" fill="#4d6480" font-size="7" font-family="sans-serif">Manutenção</text>
-            <rect x="10" y="136" width="52" height="18" rx="4" fill="transparent"/>
-            <text x="36" y="148" text-anchor="middle" fill="#4d6480" font-size="7" font-family="sans-serif">Compliance</text>
-            <rect x="10" y="158" width="52" height="18" rx="4" fill="transparent"/>
-            <text x="36" y="170" text-anchor="middle" fill="#4d6480" font-size="7" font-family="sans-serif">Tarefas</text>
-            <!-- avatar footer -->
-            <circle cx="36" cy="258" r="12" fill="url(#goldG)"/>
-            <text x="36" y="262" text-anchor="middle" fill="#000" font-size="8" font-weight="700" font-family="sans-serif">WO</text>
-
-            <!-- TOPBAR -->
-            <rect x="72" y="0" width="348" height="32" fill="#0a1628"/>
-            <text x="84" y="20" fill="#e8eef5" font-size="9" font-weight="700" font-family="sans-serif">Dashboard</text>
-            <!-- live pill -->
-            <rect x="360" y="9" width="48" height="14" rx="7" fill="rgba(34,197,94,0.15)"/>
-            <circle cx="368" cy="16" r="3" fill="#22c55e"/>
-            <text x="380" y="20" fill="#22c55e" font-size="7" font-family="sans-serif" font-weight="600">LIVE</text>
-            <!-- time -->
-            <text x="330" y="20" fill="#4d6480" font-size="7" font-family="monospace">14:38:22</text>
-
-            <!-- METRIC CARDS -->
-            <!-- card 1 -->
-            <rect x="82" y="40" width="72" height="44" rx="5" fill="#111827" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <rect x="82" y="40" width="72" height="2" rx="1" fill="#e8a020"/>
-            <text x="92" y="53" fill="#4d6480" font-size="6" font-family="sans-serif" font-weight="700">AERONAVES</text>
-            <text x="92" y="68" fill="#e8eef5" font-size="16" font-weight="700" font-family="monospace">5</text>
-            <text x="92" y="78" fill="#4d6480" font-size="6" font-family="sans-serif">3 disponíveis</text>
-            <!-- card 2 -->
-            <rect x="160" y="40" width="72" height="44" rx="5" fill="#111827" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <rect x="160" y="40" width="72" height="2" rx="1" fill="#60a5fa"/>
-            <text x="170" y="53" fill="#4d6480" font-size="6" font-family="sans-serif" font-weight="700">EM VOO</text>
-            <text x="170" y="68" fill="#e8eef5" font-size="16" font-weight="700" font-family="monospace">1</text>
-            <text x="170" y="78" fill="#4d6480" font-size="6" font-family="sans-serif">operando</text>
-            <!-- card 3 -->
-            <rect x="238" y="40" width="72" height="44" rx="5" fill="#111827" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <rect x="238" y="40" width="72" height="2" rx="1" fill="#22c55e"/>
-            <text x="248" y="53" fill="#4d6480" font-size="6" font-family="sans-serif" font-weight="700">HORAS VOO</text>
-            <text x="248" y="68" fill="#e8eef5" font-size="16" font-weight="700" font-family="monospace">1247h</text>
-            <text x="248" y="78" fill="#4d6480" font-size="6" font-family="sans-serif">acumulado</text>
-            <!-- card 4 -->
-            <rect x="316" y="40" width="94" height="44" rx="5" fill="#111827" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <rect x="316" y="40" width="94" height="2" rx="1" fill="#f87171"/>
-            <text x="326" y="53" fill="#4d6480" font-size="6" font-family="sans-serif" font-weight="700">ALERTAS</text>
-            <text x="326" y="68" fill="#e8eef5" font-size="16" font-weight="700" font-family="monospace">3</text>
-            <text x="326" y="78" fill="#4d6480" font-size="6" font-family="sans-serif">2 docs · 1 aero</text>
-
-            <!-- TABELA MISSÕES -->
-            <rect x="82" y="92" width="220" height="110" rx="5" fill="#111827" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <text x="92" y="106" fill="#4d6480" font-size="6" font-weight="700" font-family="sans-serif">MISSÕES RECENTES</text>
-            <!-- header row -->
-            <rect x="82" y="110" width="220" height="14" fill="rgba(255,255,255,0.03)"/>
-            <text x="92" y="120" fill="#4d6480" font-size="5.5" font-family="sans-serif" font-weight="700">ID</text>
-            <text x="118" y="120" fill="#4d6480" font-size="5.5" font-family="sans-serif" font-weight="700">AERONAVE</text>
-            <text x="168" y="120" fill="#4d6480" font-size="5.5" font-family="sans-serif" font-weight="700">LOCAL</text>
-            <text x="238" y="120" fill="#4d6480" font-size="5.5" font-family="sans-serif" font-weight="700">STATUS</text>
-            <!-- rows -->
-            <text x="92" y="133" fill="#e8a020" font-size="6" font-family="monospace">M001</text>
-            <text x="118" y="133" fill="#8ca0b8" font-size="6" font-family="sans-serif">ALPHA-02</text>
-            <text x="168" y="133" fill="#8ca0b8" font-size="6" font-family="sans-serif">P-76 Campos</text>
-            <rect x="238" y="126" width="40" height="10" rx="5" fill="rgba(96,165,250,0.15)"/>
-            <text x="258" y="134" text-anchor="middle" fill="#60a5fa" font-size="5.5" font-family="sans-serif" font-weight="700">Em andamento</text>
-
-            <line x1="82" y1="140" x2="302" y2="140" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-            <text x="92" y="152" fill="#e8a020" font-size="6" font-family="monospace">M002</text>
-            <text x="118" y="152" fill="#8ca0b8" font-size="6" font-family="sans-serif">ALPHA-01</text>
-            <text x="168" y="152" fill="#8ca0b8" font-size="6" font-family="sans-serif">P-52 Santos</text>
-            <rect x="238" y="145" width="36" height="10" rx="5" fill="rgba(34,197,94,0.15)"/>
-            <text x="256" y="153" text-anchor="middle" fill="#22c55e" font-size="5.5" font-family="sans-serif" font-weight="700">Concluída</text>
-
-            <line x1="82" y1="158" x2="302" y2="158" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-            <text x="92" y="170" fill="#e8a020" font-size="6" font-family="monospace">M003</text>
-            <text x="118" y="170" fill="#8ca0b8" font-size="6" font-family="sans-serif">BRAVO-02</text>
-            <text x="168" y="170" fill="#8ca0b8" font-size="6" font-family="sans-serif">FPSO Itajaí</text>
-            <rect x="238" y="163" width="36" height="10" rx="5" fill="rgba(34,197,94,0.15)"/>
-            <text x="256" y="171" text-anchor="middle" fill="#22c55e" font-size="5.5" font-family="sans-serif" font-weight="700">Concluída</text>
-
-            <line x1="82" y1="177" x2="302" y2="177" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-            <text x="92" y="189" fill="#e8a020" font-size="6" font-family="monospace">M004</text>
-            <text x="118" y="189" fill="#8ca0b8" font-size="6" font-family="sans-serif">CHARLIE-01</text>
-            <text x="168" y="189" fill="#8ca0b8" font-size="6" font-family="sans-serif">P-66 Campos</text>
-            <rect x="238" y="182" width="30" height="10" rx="5" fill="rgba(248,113,113,0.15)"/>
-            <text x="253" y="190" text-anchor="middle" fill="#f87171" font-size="5.5" font-family="sans-serif" font-weight="700">Abortada</text>
-
-            <!-- FEED OPERACIONAL -->
-            <rect x="308" y="92" width="102" height="110" rx="5" fill="#111827" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <text x="318" y="106" fill="#4d6480" font-size="6" font-weight="700" font-family="sans-serif">FEED OPERACIONAL</text>
-            <!-- alert items -->
-            <circle cx="320" cy="118" r="3" fill="#60a5fa"/>
-            <text x="327" y="121" fill="#8ca0b8" font-size="5.5" font-family="sans-serif">ALPHA-02 em voo</text>
-            <circle cx="320" cy="132" r="3" fill="#f87171"/>
-            <text x="327" y="135" fill="#8ca0b8" font-size="5.5" font-family="sans-serif">Seguro VENCIDO</text>
-            <circle cx="320" cy="146" r="3" fill="#d29922"/>
-            <text x="327" y="149" fill="#8ca0b8" font-size="5.5" font-family="sans-serif">SISANT vence 15d</text>
-            <circle cx="320" cy="160" r="3" fill="#f87171"/>
-            <text x="327" y="163" fill="#8ca0b8" font-size="5.5" font-family="sans-serif">CHARLIE-01 alerta</text>
-            <circle cx="320" cy="174" r="3" fill="#22c55e"/>
-            <text x="327" y="177" fill="#8ca0b8" font-size="5.5" font-family="sans-serif">Missão M006 plan.</text>
-
-            <!-- GRÁFICO HORAS -->
-            <rect x="82" y="210" width="100" height="62" rx="5" fill="#111827" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <text x="92" y="224" fill="#4d6480" font-size="6" font-weight="700" font-family="sans-serif">HORAS DE VOO</text>
-            <!-- bars -->
-            <rect x="92"  y="260" width="10" height="20" rx="2" fill="#e8a020" opacity="0.4"/>
-            <rect x="106" y="252" width="10" height="28" rx="2" fill="#e8a020" opacity="0.5"/>
-            <rect x="120" y="245" width="10" height="35" rx="2" fill="#e8a020" opacity="0.65"/>
-            <rect x="134" y="250" width="10" height="30" rx="2" fill="#e8a020" opacity="0.55"/>
-            <rect x="148" y="240" width="10" height="40" rx="2" fill="#e8a020" opacity="0.8"/>
-            <rect x="162" y="234" width="10" height="46" rx="2" fill="url(#goldG)"/>
-            <text x="92"  y="278" fill="#4d6480" font-size="5" font-family="sans-serif">jan</text>
-            <text x="106" y="278" fill="#4d6480" font-size="5" font-family="sans-serif">fev</text>
-            <text x="120" y="278" fill="#4d6480" font-size="5" font-family="sans-serif">mar</text>
-            <text x="134" y="278" fill="#4d6480" font-size="5" font-family="sans-serif">abr</text>
-            <text x="148" y="278" fill="#4d6480" font-size="5" font-family="sans-serif">mai</text>
-            <text x="162" y="278" fill="#4d6480" font-size="5" font-family="sans-serif">jun</text>
-
-            <!-- STATUS FROTA -->
-            <rect x="188" y="210" width="114" height="62" rx="5" fill="#111827" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <text x="198" y="224" fill="#4d6480" font-size="6" font-weight="700" font-family="sans-serif">STATUS DA FROTA</text>
-            <text x="198" y="237" fill="#8ca0b8" font-size="6" font-family="sans-serif">Disponível</text>
-            <rect x="238" y="231" width="54" height="5" rx="2.5" fill="rgba(255,255,255,0.06)"/>
-            <rect x="238" y="231" width="36" height="5" rx="2.5" fill="#22c55e"/>
-            <text x="198" y="250" fill="#8ca0b8" font-size="6" font-family="sans-serif">Em voo</text>
-            <rect x="238" y="244" width="54" height="5" rx="2.5" fill="rgba(255,255,255,0.06)"/>
-            <rect x="238" y="244" width="11" height="5" rx="2.5" fill="#60a5fa"/>
-            <text x="198" y="263" fill="#8ca0b8" font-size="6" font-family="sans-serif">Manutenção</text>
-            <rect x="238" y="257" width="54" height="5" rx="2.5" fill="rgba(255,255,255,0.06)"/>
-            <rect x="238" y="257" width="11" height="5" rx="2.5" fill="#d29922"/>
-            <text x="198" y="276" fill="#8ca0b8" font-size="6" font-family="sans-serif">Alerta</text>
-            <rect x="238" y="270" width="54" height="5" rx="2.5" fill="rgba(255,255,255,0.06)"/>
-            <rect x="238" y="270" width="11" height="5" rx="2.5" fill="#f87171"/>
-
-            <!-- COMPLIANCE -->
-            <rect x="308" y="210" width="102" height="62" rx="5" fill="#111827" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <text x="318" y="224" fill="#4d6480" font-size="6" font-weight="700" font-family="sans-serif">COMPLIANCE</text>
-            <text x="318" y="237" fill="#8ca0b8" font-size="5.5" font-family="sans-serif">Seguro operação</text>
-            <text x="390" y="237" text-anchor="end" fill="#f87171" font-size="5.5" font-family="monospace" font-weight="700">VENCIDO</text>
-            <text x="318" y="249" fill="#8ca0b8" font-size="5.5" font-family="sans-serif">SISANT ALPHA-02</text>
-            <text x="390" y="249" text-anchor="end" fill="#d29922" font-size="5.5" font-family="monospace">15d</text>
-            <text x="318" y="261" fill="#8ca0b8" font-size="5.5" font-family="sans-serif">Hab. ANAC William</text>
-            <text x="390" y="261" text-anchor="end" fill="#22c55e" font-size="5.5" font-family="monospace">365d</text>
-            <text x="318" y="273" fill="#8ca0b8" font-size="5.5" font-family="sans-serif">Cert. DECEA</text>
-            <text x="390" y="273" text-anchor="end" fill="#22c55e" font-size="5.5" font-family="monospace">275d</text>
-          </svg>
-        </div>
-
-        <div class="proj-card-footer" style="grid-column:1/-1">
-          <button class="btn-proj btn-proj-ghost" onclick="abrirModal('saas')">Ver detalhes</button>
-          <a href="https://github.com/TheDevOffshore" target="_blank" class="btn-proj btn-proj-primary">GitHub →</a>
-        </div>
-      </div>
-
-      <!-- DASHBOARD FROTA -->
-      <div class="proj-card" data-cat="frontend saas">
-        <div class="proj-card-top">
-          <div class="proj-icon">🗺️</div>
-          <span class="proj-level pl-mid">Intermediário</span>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-title">Dashboard de Frota RPAS</div>
-          <p class="proj-desc">Painel com mapa interativo (Leaflet.js) mostrando plataformas offshore, status da frota em tempo real, gráficos e alertas de manutenção.</p>
-          <div class="proj-stack">
-            <span class="ps-tag">JavaScript</span><span class="ps-tag">Leaflet.js</span><span class="ps-tag">CSS Grid</span>
-          </div>
-          <div class="proj-highlights">
-            <div class="ph-item">Mapa com P-76, P-52, P-66 e bases</div>
-            <div class="ph-item">Donut chart + gráfico de horas por mês</div>
-            <div class="ph-item">CRUD completo de aeronaves e missões</div>
+          <div class="feat-vis" aria-hidden="true">
+            <div class="fv-bar"><span>RANKING · LIVE</span><span>OPS//CAMPOS</span></div>
+            <div class="fv-row"><span class="rk">★★★ COMMANDER</span><span class="pt">2.840 pts</span></div>
+            <div class="fv-row"><span class="rk">★★ CAPTAIN</span><span class="pt">2.110 pts</span></div>
+            <div class="fv-row"><span class="rk">★ LIEUTENANT</span><span class="pt">1.670 pts</span></div>
+            <div class="fv-row"><span>◇ ENSIGN</span><span class="pt">980 pts</span></div>
+            <div class="fv-row" style="border-top:1px solid var(--line);margin-top:10px;padding-top:12px"><span>VESSELS</span><span class="pt">P-76 · P-52 · FPSO</span></div>
+            <div class="fv-row"><span>STATUS</span><span style="color:var(--green)">SCORING ONLINE</span></div>
           </div>
         </div>
-        <div class="proj-card-footer">
-          <button class="btn-proj btn-proj-ghost" onclick="abrirModal('dashboard')">Ver detalhes</button>
-          <a href="https://github.com/TheDevOffshore" target="_blank" class="btn-proj btn-proj-primary">GitHub →</a>
-        </div>
-      </div>
+      </article>
 
-      <!-- API METEO -->
-      <div class="proj-card" data-cat="backend">
-        <div class="proj-card-top">
-          <div class="proj-icon">🌊</div>
-          <span class="proj-level pl-adv">Avançado</span>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-title">API de Condições Meteo para Voo</div>
-          <p class="proj-desc">API REST em Python/FastAPI que consulta dados meteorológicos em tempo real e avalia aptidão de voo RPAS com limites operacionais por modelo de aeronave.</p>
-          <div class="proj-stack">
-            <span class="ps-tag">Python</span><span class="ps-tag">FastAPI</span><span class="ps-tag">Open-Meteo</span><span class="ps-tag">HTTPX</span>
-          </div>
-          <div class="proj-highlights">
-            <div class="ph-item">7 endpoints REST documentados no Swagger</div>
-            <div class="ph-item">Limites operacionais reais do M300 RTK e M30T</div>
-            <div class="ph-item">Plataformas P-76, P-52, FPSO pré-configuradas</div>
-          </div>
-        </div>
-        <div class="proj-card-footer">
-          <button class="btn-proj btn-proj-ghost" onclick="abrirModal('api')">Ver detalhes</button>
-          <a href="https://github.com/TheDevOffshore" target="_blank" class="btn-proj btn-proj-primary">GitHub →</a>
-        </div>
-      </div>
+      <article class="card rv-up" data-cat="ia back">
+        <div class="card-top"><span class="lvl">IA · Avançado</span></div>
+        <h3>FAROL — Agente de IA</h3>
+        <p class="desc">Agente de IA para análise de operações RPAS offshore: pergunte em português, receba números reais. Tool-calling sobre dados operacionais.</p>
+        <ul class="feats">
+          <li>FastAPI + Pandas + tool-calling com a Claude API</li>
+          <li>NLP em português sobre dados de missões</li>
+          <li>Dashboards de resposta com Chart.js</li>
+        </ul>
+        <div class="stack"><span>FastAPI</span><span>Pandas</span><span>Claude API</span><span>Chart.js</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/-FAROL" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
 
-      <!-- GERADOR SARPAS -->
-      <div class="proj-card" data-cat="frontend">
-        <div class="proj-card-top">
-          <div class="proj-icon">📄</div>
-          <span class="proj-level pl-mid">Intermediário</span>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-title">Gerador de Relatórios SARPAS</div>
-          <p class="proj-desc">App web para preenchimento e geração de relatórios operacionais no formato exigido pelo DECEA/SARPAS, com pré-visualização em tempo real do documento oficial.</p>
-          <div class="proj-stack">
-            <span class="ps-tag">HTML</span><span class="ps-tag">CSS</span><span class="ps-tag">JavaScript</span><span class="ps-tag">CSS Print</span>
-          </div>
-          <div class="proj-highlights">
-            <div class="ph-item">Preview ao vivo do documento oficial DECEA</div>
-            <div class="ph-item">Exportação CSV + impressão para PDF</div>
-            <div class="ph-item">Waypoints de rota e histórico local</div>
-          </div>
-        </div>
-        <div class="proj-card-footer">
-          <button class="btn-proj btn-proj-ghost" onclick="abrirModal('sarpas')">Ver detalhes</button>
-          <a href="https://github.com/TheDevOffshore" target="_blank" class="btn-proj btn-proj-primary">GitHub →</a>
-        </div>
-      </div>
+      <article class="card rv-up" data-cat="ia back">
+        <div class="card-top"><span class="lvl">IA · Avançado</span></div>
+        <h3>OffshoreOps Twin</h3>
+        <p class="desc">Digital twin de operações RPAS com IA de janela de voo preditiva. Responde "posso voar agora?" cruzando clima real com o microclima da plataforma.</p>
+        <ul class="feats">
+          <li>Modelo de scoring GO / CAUTION / NO-GO</li>
+          <li>Esteira de flare, zonas ATEX e rotas de helideck</li>
+          <li>Integração Open-Meteo + suíte de testes pytest</li>
+        </ul>
+        <div class="stack"><span>Python</span><span>Three.js</span><span>Open-Meteo</span><span>pytest</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/OffshoreOps-Twin" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
 
-      <!-- CHECKLIST -->
-      <div class="proj-card" data-cat="frontend">
-        <div class="proj-card-top">
-          <div class="proj-icon">✅</div>
-          <span class="proj-level pl-init">Iniciante</span>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-title">Checklist Pré-Voo Interativo</div>
-          <p class="proj-desc">App de checklist digital para operações offshore com 41 itens em 6 seções, itens críticos destacados, aprovação digital e histórico persistente.</p>
-          <div class="proj-stack">
-            <span class="ps-tag">HTML</span><span class="ps-tag">CSS</span><span class="ps-tag">JavaScript</span>
-          </div>
-          <div class="proj-highlights">
-            <div class="ph-item">41 itens baseados em procedimentos reais</div>
-            <div class="ph-item">Aprovação com assinatura digital</div>
-            <div class="ph-item">Exportação CSV por sessão</div>
-          </div>
-        </div>
-        <div class="proj-card-footer">
-          <button class="btn-proj btn-proj-ghost" onclick="abrirModal('checklist')">Ver detalhes</button>
-          <a href="https://github.com/TheDevOffshore" target="_blank" class="btn-proj btn-proj-primary">GitHub →</a>
-        </div>
-      </div>
+      <article class="card rv-up" data-cat="ia front">
+        <div class="card-top"><span class="lvl">Dados · Full-stack</span></div>
+        <h3>Bitcoin Nomad</h3>
+        <p class="desc">Painel full-stack que cruza o preço do Bitcoin em tempo real com custo de vida e ambiente regulatório de 15 países, calculando um Índice de Vida em Bitcoin.</p>
+        <ul class="feats">
+          <li>Preço ao vivo via CoinGecko</li>
+          <li>Custo de vida e qualidade de vida por país</li>
+          <li>Índice comparativo entre 15 destinos</li>
+        </ul>
+        <div class="stack"><span>JavaScript</span><span>CoinGecko API</span><span>Chart.js</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/Bitcoin-Nomad" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
 
-      <!-- LOG MISSOES -->
-      <div class="proj-card" data-cat="frontend">
-        <div class="proj-card-top">
-          <div class="proj-icon">📋</div>
-          <span class="proj-level pl-init">Iniciante</span>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-title">Log de Missões RPAS</div>
-          <p class="proj-desc">App web para registro e visualização de missões de drone offshore com métricas, filtros, busca em tempo real e exportação CSV.</p>
-          <div class="proj-stack">
-            <span class="ps-tag">HTML</span><span class="ps-tag">CSS</span><span class="ps-tag">JavaScript</span><span class="ps-tag">LocalStorage</span>
-          </div>
-          <div class="proj-highlights">
-            <div class="ph-item">Dashboard com 4 métricas operacionais</div>
-            <div class="ph-item">Filtros por status e aeronave</div>
-            <div class="ph-item">Sem servidor — roda offline</div>
-          </div>
-        </div>
-        <div class="proj-card-footer">
-          <button class="btn-proj btn-proj-ghost" onclick="abrirModal('log')">Ver detalhes</button>
-          <a href="https://github.com/TheDevOffshore" target="_blank" class="btn-proj btn-proj-primary">GitHub →</a>
-        </div>
-      </div>
+      <article class="card rv-up" data-cat="ia front">
+        <div class="card-top"><span class="lvl">IA · Intermediário</span></div>
+        <h3>TransitoBot</h3>
+        <p class="desc">Chatbot web de leis de trânsito brasileiras — um "Detran na palma da mão". Responde de perguntas leigas a técnicas, com fuzzy matching e UX de máquina de escrever.</p>
+        <ul class="feats">
+          <li>Busca fuzzy sobre a legislação de trânsito</li>
+          <li>Linguagem natural, das mais leigas às técnicas</li>
+          <li>Interface com efeito typewriter</li>
+        </ul>
+        <div class="stack"><span>JavaScript</span><span>NLP</span><span>Fuzzy Match</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/Transito-Bot" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+
+      <article class="card rv-up" data-cat="ia">
+        <div class="card-top"><span class="lvl">Visão · Avançado</span></div>
+        <h3>Offshore Anomaly Detection</h3>
+        <p class="desc">Pipeline de visão computacional que analisa fotos de inspeção e detecta anomalias em estruturas offshore automaticamente.</p>
+        <ul class="feats">
+          <li>Detecção automática em imagens de inspeção</li>
+          <li>Voltado a integridade estrutural offshore</li>
+        </ul>
+        <div class="stack"><span>Python</span><span>YOLOv8</span><span>OpenCV</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/offshore-anomaly-detection" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+
+      <article class="card rv-up" data-cat="front back">
+        <div class="card-top"><span class="lvl">SaaS · Full-stack</span></div>
+        <h3>Plataforma de Gestão Operacional</h3>
+        <p class="desc">SaaS completo para empresas de RPAS offshore: missões, frota, compliance, documentos e equipe em um só lugar, com alertas em tempo real.</p>
+        <ul class="feats">
+          <li>Autenticação multi-perfil (Piloto · Gerente · Compliance)</li>
+          <li>Módulos de frota, manutenção, kanban e relatórios</li>
+          <li>Compliance com rastreio de vencimentos</li>
+        </ul>
+        <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>SaaS</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/Plataforma-de-Gest-o-Operacional" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+
+      <article class="card rv-up" data-cat="front">
+        <div class="card-top"><span class="lvl">Front-end · Intermediário</span></div>
+        <h3>Dashboard de Frota RPAS</h3>
+        <p class="desc">Painel com mapa interativo (Leaflet.js) mostrando plataformas offshore, status da frota em tempo real, gráficos e alertas de manutenção.</p>
+        <ul class="feats">
+          <li>Mapa com P-76, P-52, P-66 e bases</li>
+          <li>Donut chart + gráfico de horas por mês</li>
+          <li>CRUD completo de aeronaves e missões</li>
+        </ul>
+        <div class="stack"><span>JavaScript</span><span>Leaflet.js</span><span>CSS Grid</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/Dashboard-de-Frota-RPAS" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+
+      <article class="card rv-up" data-cat="back">
+        <div class="card-top"><span class="lvl">Back-end · Avançado</span></div>
+        <h3>API de Condições Meteo para Voo</h3>
+        <p class="desc">API REST em Python/FastAPI que consulta dados meteorológicos em tempo real e avalia aptidão de voo RPAS com limites operacionais por modelo de aeronave.</p>
+        <ul class="feats">
+          <li>Endpoints REST documentados no Swagger</li>
+          <li>Limites operacionais reais do M300 RTK e M30T</li>
+          <li>Plataformas P-76, P-52, FPSO pré-configuradas</li>
+        </ul>
+        <div class="stack"><span>Python</span><span>FastAPI</span><span>Open-Meteo</span><span>HTTPX</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/offshore-flight-weather-api" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+
+      <article class="card rv-up" data-cat="front">
+        <div class="card-top"><span class="lvl">Front-end · Intermediário</span></div>
+        <h3>Gerador de Relatórios SARPAS</h3>
+        <p class="desc">App web para preenchimento e geração de relatórios no formato exigido pelo DECEA/SARPAS, com pré-visualização ao vivo do documento oficial.</p>
+        <ul class="feats">
+          <li>Preview ao vivo do documento oficial DECEA</li>
+          <li>Exportação CSV + impressão para PDF</li>
+          <li>Waypoints de rota e histórico local</li>
+        </ul>
+        <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/Gerador-de-Relat-rios-SARPAS" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+
+      <article class="card rv-up" data-cat="front">
+        <div class="card-top"><span class="lvl">Front-end · Iniciante</span></div>
+        <h3>Checklist Pré-Voo Interativo</h3>
+        <p class="desc">Checklist digital de segurança para operações offshore, com 41 itens em 6 seções, itens críticos destacados, aprovação digital e histórico.</p>
+        <ul class="feats">
+          <li>41 itens baseados em procedimentos reais</li>
+          <li>Aprovação com assinatura digital</li>
+          <li>Exportação CSV por sessão</li>
+        </ul>
+        <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/Checklist-Pr--Voo-Interativo" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+
+      <article class="card rv-up" data-cat="front">
+        <div class="card-top"><span class="lvl">Front-end · Iniciante</span></div>
+        <h3>Log de Missões RPAS</h3>
+        <p class="desc">App web para registrar e visualizar missões de drone: data, local, aeronave, condições meteorológicas e observações, com filtros e busca.</p>
+        <ul class="feats">
+          <li>Dashboard com métricas operacionais</li>
+          <li>Filtros por status e aeronave</li>
+          <li>Sem servidor — roda offline</li>
+        </ul>
+        <div class="stack"><span>HTML</span><span>JavaScript</span><span>LocalStorage</span></div>
+        <div class="card-links"><a href="https://github.com/TheDevOffshore/Log-de-Miss-es-RPAS" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
 
     </div>
   </div>
 </section>
 
-<!-- EXPERIÊNCIA -->
-<section id="experiencia">
-  <div class="section-wrap">
-    <div class="section-label">Trajetória</div>
-    <div class="section-title">Experiência profissional</div>
-    <div class="exp-grid reveal">
-      <div>
-        <div class="exp-col-title">Operações RPAS</div>
-        <div class="exp-item">
-          <div class="exp-company">Empresa Offshore</div>
-          <div class="exp-role">Piloto de RPAS Offshore — Técnico de Operações Contínuas</div>
-          <div class="exp-period">2022 → Presente</div>
-          <ul class="exp-desc">
-            <li>Operação de DJI M300 RTK e M30T embarcado em OSRVs (Oil Spill Response Vessels) nas bacias de Campos e Santos</li>
-            <li>Planejamento e execução de missões de inspeção estrutural e termografia</li>
+<!-- FROTA -->
+<section id="frota">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-tag"><span class="num">[04]</span> Esquadrão <span class="ln"></span></div>
+      <h2 class="sec-title">A frota (sim, eles têm nome)</h2>
+      <p class="sec-lead">As aeronaves que operei em campo — batizadas com a mitologia grega que dá nome ao esquadrão.</p>
+    </div>
+    <div class="fleet-grid">
+      <div class="drone frame rv-up"><div class="glyph">⬡</div><div class="cn">ZEUS</div><div class="md">DJI M300 RTK</div><div class="role">Principal</div></div>
+      <div class="drone frame rv-up"><div class="glyph">⬢</div><div class="cn">HERCULES</div><div class="md">DJI M30T</div><div class="role">Principal · Termografia</div></div>
+      <div class="drone frame rv-up"><div class="glyph">⬡</div><div class="cn">ATLAS</div><div class="md">DJI M350 RTK</div><div class="role">Reserva tática</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAJETORIA -->
+<section id="trajetoria">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-tag"><span class="num">[05]</span> Trajetória <span class="ln"></span></div>
+      <h2 class="sec-title">Experiência profissional</h2>
+    </div>
+    <div class="about-grid" style="align-items:start">
+      <div class="timeline rv-up">
+        <div class="tl-item">
+          <div class="tl-date">2022 → PRESENTE</div>
+          <div class="tl-role">Piloto de RPAS Offshore</div>
+          <div class="tl-org">Técnico de Operações Contínuas</div>
+          <ul class="tl-list">
+            <li>Operação de DJI M300 RTK, M30T e M350 RTK embarcado em OSRVs nas bacias de Campos e Santos</li>
+            <li>Missões de inspeção estrutural e termografia</li>
             <li>Gestão de autorizações SARPAS e comunicação com DECEA</li>
             <li>Elaboração de SOPs e documentação operacional</li>
             <li>Conformidade com ANAC RBAC-E 94 e NR-34</li>
           </ul>
         </div>
-      </div>
-      <div>
-        <div class="exp-col-title">Desenvolvimento</div>
-        <div class="exp-item">
-          <div class="exp-company">Projetos Próprios</div>
-          <div class="exp-role">Desenvolvedor — Foco em Oil & Gas / RPAS</div>
-          <div class="exp-period">2024 → Presente</div>
-          <ul class="exp-desc">
-            <li>6 projetos web completos voltados para o setor offshore</li>
-            <li>API REST em Python/FastAPI integrada com Open-Meteo</li>
-            <li>SaaS de gestão operacional com múltiplos módulos</li>
-            <li>Dashboards com mapas interativos (Leaflet.js)</li>
+        <div class="tl-item">
+          <div class="tl-date">2024 → PRESENTE</div>
+          <div class="tl-role">Desenvolvedor · Dados &amp; IA</div>
+          <div class="tl-org">Projetos próprios — foco em Oil &amp; Gas / RPAS</div>
+          <ul class="tl-list">
+            <li>Projetos web full-stack voltados ao setor offshore</li>
+            <li>Agentes de IA com tool-calling sobre a Claude API</li>
+            <li>SaaS de gestão operacional multi-módulo</li>
+            <li>Pipelines de visão computacional para inspeção</li>
             <li>Sistemas de compliance regulatório ANAC/DECEA</li>
           </ul>
         </div>
-        <div class="exp-item">
-          <div class="exp-company">Formação Contínua</div>
-          <div class="exp-role">Autodidata — Desenvolvimento & Análise de Dados</div>
-          <div class="exp-period">2023 → Presente</div>
-          <ul class="exp-desc">
-            <li>HTML, CSS, JavaScript — projetos aplicados</li>
-            <li>Python, FastAPI, APIs REST</li>
+        <div class="tl-item">
+          <div class="tl-date">2023 → PRESENTE</div>
+          <div class="tl-role">Formação contínua</div>
+          <div class="tl-org">Autodidata — Desenvolvimento &amp; Análise de Dados</div>
+          <ul class="tl-list">
+            <li>Python, FastAPI, APIs REST — projetos aplicados</li>
             <li>Plano de 12 meses de integração com IA (YOLOv8, Roboflow)</li>
             <li>Roadmap FAA Part 107, EASA e certificações internacionais</li>
           </ul>
         </div>
       </div>
+      <div class="rv-up">
+        <div class="panel frame ops-console">
+          <div class="tele-top">
+            <span class="id">OPS CONSOLE</span>
+            <span class="st">● LIVE</span>
+          </div>
+          <div class="tele-row"><span>TEMPO EM OPS</span><span>~10 anos</span></div>
+          <div class="tele-row"><span>BACIAS</span><span>Campos · Santos</span></div>
+          <div class="tele-row"><span>EMBARCAÇÕES</span><span>OSRVs · FPSO</span></div>
+          <div class="tele-row"><span>AERONAVES</span><span>M300 · M30T · M350</span></div>
+          <div class="tele-row"><span>FOCO ATUAL</span><span>Dev · Dados · IA</span></div>
+          <div class="roadmap">
+            <div class="rm-h">// ROADMAP · 10 ANOS</div>
+            <div class="rm-step done"><span class="rm-dot"></span><div>Certificações &amp; operação<small>FASE 1 — CONCLUÍDA</small></div></div>
+            <div class="rm-step active"><span class="rm-dot"></span><div>Autoridade técnica + dev<small>FASE 2 — EM CURSO</small></div></div>
+            <div class="rm-step"><span class="rm-dot"></span><div>Consultoria &amp; referência<small>FASE 3 — PLANEJADA</small></div></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+<section id="credenciais">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-tag"><span class="num">[06]</span> Credenciais <span class="ln"></span></div>
+      <h2 class="sec-title">Formação &amp; certificações</h2>
+      <p class="sec-lead">Duas frentes que se somam: a base de desenvolvimento de software e a credencial operacional offshore.</p>
+    </div>
 
-<!-- CERTIFICAÇÕES -->
-<section id="certificacoes">
-  <div class="section-wrap">
-    <div class="section-label">Certificações</div>
-    <div class="section-title">Qualificações & Certificados</div>
-    <div class="certs-grid reveal">
-      <div class="cert-card">
-        <div class="cert-icon">🏛️</div>
-        <div><div class="cert-name">Habilitação ANAC</div><div class="cert-org">Agência Nacional de Aviação Civil</div><div class="cert-status cs-ativo">Ativo</div></div>
+    <!-- GRUPO 1: DESENVOLVIMENTO -->
+    <div class="cred-block rv-up">
+      <div class="cred-sub"><span class="tag">Área de Desenvolvimento</span><span class="ln"></span></div>
+      <div class="dev-cert-grid">
+        <div class="cert frame">
+          <div class="cert-org">Estácio</div>
+          <div class="ct">MTech · Análise e Desenvolvimento de Sistemas</div>
+          <div class="co">2021 – 2025 · pós-graduação tecnológica. Programação, banco de dados, dev web, engenharia de software e análise de requisitos.</div>
+          <span class="badge ativo">Concluído</span>
+        </div>
+        <div class="cert frame">
+          <div class="cert-org">Alura</div>
+          <div class="ct">Formação Desenvolvedor Fullstack</div>
+          <div class="co">2020 – 2022 · três anos de projetos pessoais e freelance, front-end e back-end, com base sólida em desenvolvimento web.</div>
+          <span class="badge ativo">Concluído</span>
+        </div>
+        <div class="cert frame">
+          <div class="cert-org">Microcamp</div>
+          <div class="ct">Montagem e Manutenção de Micros · Hardware e Software</div>
+          <div class="co">2012 – 2014 · especialização técnica em hardware, suporte de TI e componentes de computadores.</div>
+          <span class="badge ativo">Concluído</span>
+        </div>
       </div>
-      <div class="cert-card">
-        <div class="cert-icon">📡</div>
-        <div><div class="cert-name">Certificado DECEA</div><div class="cert-org">Departamento de Controle do Espaço Aéreo</div><div class="cert-status cs-ativo">Ativo</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🛸</div>
-        <div><div class="cert-name">DJI Enterprise</div><div class="cert-org">DJI — M300 RTK · M30T · M350 RTK</div><div class="cert-status cs-ativo">Ativo</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🦺</div>
-        <div><div class="cert-name">NR-34 Offshore</div><div class="cert-org">Trabalho em embarcações e plataformas</div><div class="cert-status cs-ativo">Ativo</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🇺🇸</div>
-        <div><div class="cert-name">FAA Part 107</div><div class="cert-org">Federal Aviation Administration — EUA</div><div class="cert-status cs-previsto">Previsto 2025</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🌡️</div>
-        <div><div class="cert-name">Termografia RPAS</div><div class="cert-org">Inspeção termográfica com drones</div><div class="cert-status cs-previsto">Em estudo</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🗺️</div>
-        <div><div class="cert-name">Pix4D / DroneDeploy</div><div class="cert-org">Processamento fotogramétrico</div><div class="cert-status cs-previsto">Em estudo</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🇪🇺</div>
-        <div><div class="cert-name">EASA — Open A2</div><div class="cert-org">Agência Europeia de Segurança Aérea</div><div class="cert-status cs-previsto">Roadmap 2026</div></div>
+      <div class="stack-panel frame">
+        <div class="sp-h">// Stack que domino e uso nos projetos</div>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">FastAPI</span>
+          <span class="chip">SQLite</span>
+          <span class="chip">Pydantic</span>
+          <span class="chip">HTTPX</span>
+          <span class="chip">REST APIs</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">HTML5</span>
+          <span class="chip">CSS3</span>
+          <span class="chip">React</span>
+          <span class="chip">Chart.js</span>
+          <span class="chip">Leaflet.js</span>
+          <span class="chip">Three.js</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">YOLOv8</span>
+          <span class="chip">OpenCV</span>
+          <span class="chip">Roboflow</span>
+          <span class="chip">Claude API · Tool-calling</span>
+          <span class="chip">RAG · NLP</span>
+          <span class="chip">Open-Meteo</span>
+          <span class="chip">pytest</span>
+          <span class="chip">Git · GitHub</span>
+          <span class="chip">PowerShell</span>
+        </div>
       </div>
     </div>
+
+    <!-- GRUPO 2: OFFSHORE -->
+    <div class="cred-block rv-up">
+      <div class="cred-sub"><span class="tag">Área Offshore &amp; RPAS</span><span class="ln"></span></div>
+      <div class="cert-grid">
+        <div class="cert frame"><div class="cert-org">ANAC</div><div class="ct">Habilitação ANAC</div><div class="co">Agência Nacional de Aviação Civil</div><span class="badge ativo">Ativo</span></div>
+        <div class="cert frame"><div class="cert-org">DECEA</div><div class="ct">Certificado DECEA</div><div class="co">Controle do Espaço Aéreo</div><span class="badge ativo">Ativo</span></div>
+        <div class="cert frame"><div class="cert-org">SARPAS NG</div><div class="ct">SARPAS NG</div><div class="co">Solicitação de acesso ao espaço aéreo — DECEA</div><span class="badge ativo">Ativo</span></div>
+        <div class="cert frame"><div class="cert-org">DJI</div><div class="ct">DJI Enterprise</div><div class="co">M300 RTK · M30T · M350 RTK</div><span class="badge ativo">Ativo</span></div>
+        <div class="cert frame"><div class="cert-org">NR-34</div><div class="ct">NR-34 Offshore</div><div class="co">Embarcações e plataformas</div><span class="badge ativo">Ativo</span></div>
+        <div class="cert frame"><div class="cert-org">FAA</div><div class="ct">FAA Part 107</div><div class="co">Federal Aviation Admin — EUA</div><span class="badge prev">Previsto</span></div>
+        <div class="cert frame"><div class="cert-org">Termografia</div><div class="ct">Termografia RPAS</div><div class="co">Inspeção termográfica</div><span class="badge est">Em estudo</span></div>
+        <div class="cert frame"><div class="cert-org">Fotogrametria</div><div class="ct">Pix4D / DroneDeploy</div><div class="co">Processamento fotogramétrico</div><span class="badge est">Em estudo</span></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- CONTATO -->
-<section id="contato">
-  <div class="section-wrap">
-    <div class="contato-wrap reveal">
-      <div class="section-label" style="text-align:center;justify-content:center;display:flex">Contato</div>
-      <div class="contato-title">Vamos trabalhar juntos?</div>
-      <p class="contato-sub">Seja para uma oportunidade em desenvolvimento, análise de dados, operações RPAS ou qualquer interseção entre tecnologia e o setor offshore — estou disponível para conversar.</p>
-      <div class="contato-links">
-        <a href="https://linkedin.com/in/wmdevoffshore" target="_blank" class="contato-link cl-linkedin">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-        <a href="https://github.com/TheDevOffshore" target="_blank" class="contato-link cl-github">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-          GitHub
-        </a>
-        <a href="mailto:wm.dev.offshore@gmail.com" class="contato-link cl-email">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          E-mail
-        </a>
-      </div>
-      <div class="contato-note">
-        <strong>Áreas de interesse:</strong> desenvolvimento front-end ou full-stack, análise de dados, consultor técnico RPAS, e oportunidades no setor de óleo e gás que envolvam tecnologia. Aberto a trabalho remoto e híbrido.
-      </div>
+<section id="contato" class="contact">
+  <div class="wrap">
+    <div class="sec-tag rv" style="justify-content:center"><span class="num">[07]</span> Estabelecer contato</div>
+    <h2 class="sec-title rv-up">Vamos trabalhar juntos?</h2>
+    <p class="rv-up">Desenvolvimento front-end ou full-stack, análise de dados, engenharia de IA, consultoria técnica RPAS ou qualquer interseção entre tecnologia e o setor offshore. Aberto a remoto e híbrido.</p>
+    <div class="cc-links rv-up">
+      <a href="https://www.linkedin.com/in/wmdevoffshore/" target="_blank" rel="noopener" class="btn btn-pri">LinkedIn</a>
+      <a href="https://github.com/TheDevOffshore" target="_blank" rel="noopener" class="btn btn-gho">GitHub</a>
+      <a href="mailto:wm.dev.offshore@gmail.com" class="btn btn-gho" id="mailBtn">E-mail</a>
     </div>
+    <p class="note">// Áreas: dev full-stack · dados · IA · consultoria RPAS · oil &amp; gas + tech</p>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-left">
-    WO.dev — William Oliveira · TheDevOffshore
+  <div class="wrap">
+    <div class="fb">WO<b>.dev</b></div>
+    <p>William Oliveira · TheDevOffshore · São José dos Campos — SP · Brasil</p>
+    <p style="margin-top:4px;color:var(--cyan-dim)">Ground Control Station · build 2026</p>
   </div>
-  <div class="footer-right">Feito com HTML, CSS e JS · 2026</div>
 </footer>
 
-<!-- MODAL DETALHES PROJETO -->
-<div class="proj-modal-overlay" id="proj-modal">
-  <div class="proj-modal">
-    <div class="pm-header">
-      <div class="pm-title" id="pm-title">—</div>
-      <button class="pm-close" onclick="fecharModal()">×</button>
-    </div>
-    <div class="pm-body" id="pm-body"></div>
-    <div class="pm-footer" id="pm-footer"></div>
+<!-- STATUS BAR -->
+<div class="statusbar">
+  <div class="sb-in">
+    <div class="sb-l"><span class="dot"></span><span class="g">SISTEMA ONLINE</span><span>WO//GCS</span></div>
+    <div class="sb-r"><span id="clock">--:--:--</span></div>
   </div>
 </div>
 
 <script>
-// ── FILTRO PROJETOS ───────────────────────────────────────────────
-document.querySelectorAll('.pf-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.pf-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter=btn.dataset.filter;
-    document.querySelectorAll('.proj-card').forEach(card=>{
-      const cat=card.dataset.cat||'';
-      const show=filter==='all'||cat.includes(filter);
-      card.style.display=show?'flex':'none';
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---- BOOT SEQUENCE ---- */
+(function(){
+  const boot=document.getElementById('boot');
+  if(!boot||reduce){ if(boot){boot.classList.add('done');setTimeout(()=>boot.remove(),50);} return; }
+  const lines=[
+    {t:'> inicializando ground control station...'},
+    {t:'> carregando telemetria do operador <span class="ok">[OK]</span>'},
+    {t:'> autenticando certs <span class="tag">ANAC · DECEA · NR-34</span> <span class="ok">[OK]</span>'},
+    {t:'> sincronizando esquadrão <span class="tag">ZEUS · HERCULES · ATLAS</span> <span class="ok">[OK]</span>'},
+    {t:'> montando registro de missões <span class="ok">[OK]</span>'},
+    {t:'> conexão estabelecida. <span class="ok">SISTEMA ONLINE</span>'}
+  ];
+  const box=document.getElementById('bootLines');
+  let i=0;
+  function next(){
+    if(i<lines.length){
+      const d=document.createElement('div');
+      d.className='boot-line';d.innerHTML=lines[i].t;box.appendChild(d);
+      requestAnimationFrame(()=>d.classList.add('show'));
+      i++; setTimeout(next, 360);
+    }
+  }
+  next();
+  // progress bar
+  const bar=document.getElementById('bootBar'),pct=document.getElementById('bootPct'),stat=document.getElementById('bootStat');
+  let p=0;
+  const iv=setInterval(()=>{
+    p+=Math.random()*9+5; if(p>=100){p=100;clearInterval(iv);stat.textContent='ONLINE';}
+    bar.style.width=p+'%'; pct.textContent=Math.floor(p)+'%';
+  },180);
+  setTimeout(()=>{boot.classList.add('done');setTimeout(()=>boot.remove(),650);},2700);
+})();
+
+/* ---- CLOCK ---- */
+(function(){
+  const c=document.getElementById('clock');
+  function tick(){const d=new Date();c.textContent=d.toLocaleTimeString('pt-BR',{hour12:false});}
+  tick();setInterval(tick,1000);
+})();
+
+/* ---- REVEAL ON SCROLL ---- */
+(function(){
+  const els=document.querySelectorAll('.rv,.rv-up');
+  if(reduce){els.forEach(e=>e.classList.add('in'));return;}
+  const io=new IntersectionObserver((ents)=>{
+    ents.forEach((e,idx)=>{
+      if(e.isIntersecting){
+        const sib=[...e.target.parentElement.children].indexOf(e.target);
+        e.target.style.transitionDelay=(Math.min(sib,6)*55)+'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(e=>io.observe(e));
+})();
+
+/* ---- COUNTERS ---- */
+(function(){
+  const stats=document.querySelectorAll('[data-count]');
+  const io=new IntersectionObserver((ents)=>{
+    ents.forEach(e=>{
+      if(e.isIntersecting){
+        const el=e.target,target=+el.dataset.count;let cur=0;
+        const step=Math.max(1,Math.ceil(target/30));
+        if(reduce||target===0){el.textContent=target;io.unobserve(el);return;}
+        const iv=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(iv);}el.textContent=cur;},32);
+        io.unobserve(el);
+      }
+    });
+  },{threshold:.5});
+  stats.forEach(s=>io.observe(s));
+})();
+
+/* ---- PROJECT FILTERS ---- */
+(function(){
+  const btns=document.querySelectorAll('.filt'),cards=document.querySelectorAll('#projGrid .card');
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    btns.forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;
+    cards.forEach(c=>{
+      const show = f==='all' || c.dataset.cat.includes(f);
+      c.style.display = show ? '' : 'none';
+    });
+  }));
+})();
+
+/* ---- NAV scroll + burger ---- */
+(function(){
+  const nav=document.getElementById('nav'),burger=document.getElementById('burger');
+  window.addEventListener('scroll',()=>{nav.style.background = window.scrollY>40 ? 'rgba(4,7,12,.92)':'rgba(4,7,12,.7)';});
+  if(burger)burger.addEventListener('click',()=>nav.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+})();
+/* ---- CLICK GLITCH on buttons ---- */
+(function(){
+  if(reduce)return;
+  document.querySelectorAll('.btn,.nav-cta,.filt').forEach(b=>{
+    b.addEventListener('click',()=>{
+      b.classList.remove('glitch-fx');
+      void b.offsetWidth;
+      b.classList.add('glitch-fx');
+      setTimeout(()=>b.classList.remove('glitch-fx'),440);
     });
   });
-});
-
-// ── SCROLL REVEAL ────────────────────────────────────────────────
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-// ── MODAL PROJETOS ────────────────────────────────────────────────
-const PROJ_DATA={
-  saas:{
-    title:'Plataforma de Gestão RPAS',
-    desc:'SaaS completo de gestão operacional para frotas de drones em ambientes offshore. A motivação foi resolver o problema real da gestão fragmentada em planilhas Excel que acontece em operações offshore.',
-    problem:'A gestão de frotas RPAS offshore hoje depende de planilhas descentralizadas, sem visibilidade consolidada de status de aeronaves, compliance regulatório, manutenções e missões.',
-    solution:'Plataforma web completa com 8 módulos integrados: Dashboard, Missões, Frota, Manutenção, Compliance, Equipe, Tarefas e Relatórios.',
-    stack:'HTML5 · CSS3 · JavaScript ES6+ · LocalStorage · Space Grotesk · JetBrains Mono',
-    features:['Login com 3 perfis — Piloto, Gerente e Compliance','Dashboard com métricas ao vivo e feed operacional','Gestão de frota com alertas automáticos de manutenção','Compliance com rastreio de vencimentos ANAC/SISANT','Kanban de tarefas operacionais','Exportação CSV de missões, frota e compliance'],
-    github:'https://github.com/TheDevOffshore',
-  },
-  dashboard:{
-    title:'Dashboard de Frota RPAS',
-    desc:'Painel de gestão e monitoramento de frotas de drones com mapa interativo das plataformas offshore, gráficos de desempenho e alertas de manutenção.',
-    problem:'Falta de visibilidade centralizada do status operacional da frota em tempo real.',
-    solution:'Dashboard com mapa Leaflet.js mostrando plataformas reais (P-76, P-52, P-66), status de cada aeronave, gráficos de horas por mês e alertas automáticos.',
-    stack:'HTML5 · CSS3 · JavaScript · Leaflet.js 1.9.4 · CartoDB Dark Tiles',
-    features:['Mapa interativo com 7 locais offshore reais','Status ao vivo: disponível, em voo, manutenção, alerta','Gráfico de horas de voo — 6 meses','Donut chart de distribuição da frota','CRUD completo de aeronaves e missões','Alertas de manutenção com badge de urgência'],
-    github:'https://github.com/TheDevOffshore',
-  },
-  api:{
-    title:'API de Condições Meteo para Voo',
-    desc:'API REST em Python com FastAPI que consulta dados meteorológicos em tempo real via Open-Meteo e retorna avaliação automática de aptidão para voo RPAS.',
-    problem:'A decisão de voar em condições adversas é crítica. Não existe ferramenta que avalie automaticamente as condições com os limites operacionais específicos de cada aeronave.',
-    solution:'API com 7 endpoints que consulta Open-Meteo (gratuito, sem API key), aplica limites reais do M300 RTK e M30T e retorna veredicto: APTO, APTO COM ATENÇÃO ou NÃO APTO.',
-    stack:'Python 3.10+ · FastAPI · Uvicorn · HTTPX · Pydantic v2 · Open-Meteo API',
-    features:['7 endpoints REST com Swagger automático em /docs','Limites operacionais reais por modelo de aeronave','Plataformas offshore pré-configuradas (P-76, P-52...)','Endpoint /relatorio gera relatório formal em JSON','Front-end web com modo demo sem API','Histórico em memória das últimas 50 avaliações'],
-    github:'https://github.com/TheDevOffshore',
-  },
-  sarpas:{
-    title:'Gerador de Relatórios SARPAS',
-    desc:'App web para preenchimento e geração de relatórios operacionais no formato exigido pelo DECEA/SARPAS, com pré-visualização do documento oficial em tempo real.',
-    problem:'O preenchimento de relatórios SARPAS é manual, demorado e sujeito a erros. Cada campo alterado exige re-impressão do documento.',
-    solution:'Formulário em 6 seções com preview ao vivo do documento no formato oficial — cada campo atualiza o relatório instantaneamente.',
-    stack:'HTML5 · CSS3 · JavaScript · CSS @media print · LocalStorage',
-    features:['Preview em tempo real no formato oficial DECEA','6 seções: identificação, piloto, aeronave, área, meteo, ocorrências','Waypoints de rota ilimitados','Impressão limpa para PDF via browser','Histórico de relatórios com edição posterior','Exportação CSV com todos os campos'],
-    github:'https://github.com/TheDevOffshore',
-  },
-  checklist:{
-    title:'Checklist Pré-Voo Interativo',
-    desc:'Checklist digital de segurança para operações RPAS offshore com 41 itens em 6 seções, itens críticos destacados, aprovação com assinatura e histórico persistente.',
-    problem:'Checklists em papel se perdem, não são auditáveis e não têm alertas para itens críticos não verificados.',
-    solution:'App digital com progresso em tempo real, itens críticos em destaque, campo de observação por item e aprovação formal com registro histórico.',
-    stack:'HTML5 · CSS3 · JavaScript · LocalStorage',
-    features:['41 itens baseados em procedimentos reais offshore','6 seções: documentação, aeronave, baterias, software, meteo, EPI','Itens críticos destacados em vermelho','Botão N/A por item para itens não aplicáveis','Aprovação com assinatura digital','Histórico completo de todas as sessões aprovadas'],
-    github:'https://github.com/TheDevOffshore',
-  },
-  log:{
-    title:'Log de Missões RPAS',
-    desc:'App web para registro e visualização de missões de drone offshore com dashboard de métricas, filtros por status e aeronave, e exportação CSV.',
-    problem:'O registro de missões é feito em papel ou planilhas genéricas, sem visualização de dados históricos e sem busca eficiente.',
-    solution:'App com tabela, filtros em tempo real, 4 métricas no topo (total, horas, concluídas, mês) e exportação CSV com encoding UTF-8.',
-    stack:'HTML5 · CSS3 · JavaScript · LocalStorage',
-    features:['Dashboard com 4 métricas operacionais','Busca em tempo real por qualquer campo','Filtros por status e modelo de aeronave','Modal de detalhe de cada missão','Exportação CSV compatível com Excel PT-BR','Funciona 100% offline — sem servidor'],
-    github:'https://github.com/TheDevOffshore',
-  },
-};
-
-function abrirModal(key){
-  const d=PROJ_DATA[key];if(!d)return;
-  document.getElementById('pm-title').textContent=d.title;
-  document.getElementById('pm-body').innerHTML=`
-    <div class="pm-section"><div class="pm-lbl">O problema</div><div class="pm-text">${d.problem}</div></div>
-    <div class="pm-section"><div class="pm-lbl">A solução</div><div class="pm-text">${d.solution}</div></div>
-    <div class="pm-section"><div class="pm-lbl">Stack utilizada</div><div class="pm-text" style="font-family:var(--mono);font-size:12px;color:var(--gold)">${d.stack}</div></div>
-    <div class="pm-section"><div class="pm-lbl">Funcionalidades</div><div class="pm-feat-list">${d.features.map(f=>`<div class="pm-feat">${f}</div>`).join('')}</div></div>
-  `;
-  document.getElementById('pm-footer').innerHTML=`
-    <button class="btn-proj btn-proj-ghost" onclick="fecharModal()" style="flex:0 0 auto;padding:8px 16px">Fechar</button>
-    <a href="${d.github}" target="_blank" class="btn-proj btn-proj-primary">Ver no GitHub →</a>
-  `;
-  document.getElementById('proj-modal').classList.add('open');
-}
-
-function fecharModal(){
-  document.getElementById('proj-modal').classList.remove('open');
-}
-
-document.getElementById('proj-modal').addEventListener('click',function(e){
-  if(e.target===this)fecharModal();
-});
-
-// ── NAV ACTIVE ────────────────────────────────────────────────────
-const sections=document.querySelectorAll('section[id]');
-const navLinks=document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll',()=>{
-  let current='';
-  sections.forEach(s=>{
-    if(window.scrollY>=s.offsetTop-80)current=s.id;
-  });
-  navLinks.forEach(a=>{
-    a.style.color=a.getAttribute('href')==='#'+current?'var(--gold)':'';
-  });
-});
-
-// ── RADAR ANIMAÇÃO HERO ───────────────────────────────────────────
-// já no CSS, sem JS necessário
+})();
 </script>
 </body>
 </html>
